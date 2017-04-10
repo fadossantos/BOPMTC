@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+
+<title>BOPMTC - Protótipo Web</title>
+
+<div th:replace="fragments/_css" />
+
+</head>
+
+<body>
+	<div id="barraSuperior">
+		<nav
+			class="navbar navbar-fixed-top navbar-toggleable-sm navbar-inverse bg-primary mb-3">
+			<button class="navbar-toggler navbar-toggler-right" type="button"
+				data-toggle="collapse" data-target="#menuSuperior">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="flex-row d-flex">
+				<button type="button" class="hidden-md-up navbar-toggler"
+					data-toggle="offcanvas" title="Toggle responsive left sidebar">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<a class="navbar-brand mb-1" href="#"><img
+					src="static/images/policia_symbol.png" height="25" width="30" />
+					PMESP</a>
+
+			</div>
+			<div id="menuSuperior"></div>
+		</nav>
+	</div>
+	<div class="container-fluid" id="main">
+		<div class="row row-offcanvas row-offcanvas-left">
+			<div id="menuLateral"></div>
+			<div class="col-md-9 col-lg-9 col-md-offset-3 container main">
+				<div id="corpoPagina" >
+					<div class="row">
+						<div class="card col-lg-4"
+							th:each="ocorrencia : ${listaOcorrencias}">
+							<h4 class="card-header"
+								th:text="'Ocorrencia de nº ' + ${ocorrencia.numeroOcorrencia}">Featured</h4>
+							<div class="card-block">
+								<h5 class="card-title">Special title treatment</h5>
+								<p class="card-text"
+									th:text="${ocorrencia.origemOcorrencia.historicoInicial}">With
+									supporting text below as a natural lead-in to additional
+									content.</p>
+								<a href="#" class="btn btn-primary">Atender</a>
+							</div>
+
+						</div>
+					</div>
+
+					<h4>Teste BOPMTC</h4>
+					<a href="#"
+						onclick="executaAjaxGet('/exibeMenuSuperior', 'menuSuperior', '', '')">Mostra
+						Superior</a> <a href="#"
+						onclick="executaAjaxGet('/exibeMenuLateral', 'menuLateral', '', '')">Mostra
+						Lateral</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<div id="resultLoading" style="display: none">
+		<div>
+			<img src="/static/images/ajax-loader.gif"></img>
+			<div>Carregando</div>
+		</div>
+		<div class="bg"></div>
+	</div>
+
+	<div th:replace="fragments/_scripts" />
+
+</body>
+</html>
