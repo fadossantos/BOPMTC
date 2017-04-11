@@ -33,42 +33,18 @@
 					PMESP</a>
 
 			</div>
-			<div id="menuSuperior"></div>
+			<div id="menuSuperior" th:replace="fragments/_menuSuperior"></div>
 		</nav>
 	</div>
 	<div class="container-fluid" id="main">
 		<div class="row row-offcanvas row-offcanvas-left">
 			<div id="menuLateral"></div>
 			<div class="col-md-9 col-lg-9 col-md-offset-3 container main">
-				<div id="corpoPagina" >
-					<div class="row">
-						<div class="card col-lg-4"
-							th:each="ocorrencia : ${listaOcorrencias}">
-							<h4 class="card-header"
-								th:text="'Ocorrencia de nº ' + ${ocorrencia.numeroOcorrencia}">Featured</h4>
-							<div class="card-block">
-								<h5 class="card-title">Special title treatment</h5>
-								<p class="card-text"
-									th:text="${ocorrencia.origemOcorrencia.historicoInicial}">With
-									supporting text below as a natural lead-in to additional
-									content.</p>
-								<a href="#" class="btn btn-primary">Atender</a>
-							</div>
-
-						</div>
-					</div>
-
-					<h4>Teste BOPMTC</h4>
-					<a href="#"
-						onclick="executaAjaxGet('/exibeMenuSuperior', 'menuSuperior', '', '')">Mostra
-						Superior</a> <a href="#"
-						onclick="executaAjaxGet('/exibeMenuLateral', 'menuLateral', '', '')">Mostra
-						Lateral</a>
+				<div id="corpoPagina" th:replace="ocorrencias/listarOcorrencias">
 				</div>
 			</div>
 		</div>
 	</div>
-
 
 
 	<div id="resultLoading" style="display: none">
@@ -80,6 +56,5 @@
 	</div>
 
 	<div th:replace="fragments/_scripts" />
-
 </body>
 </html>

@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.gov.sp.policiamilitar.bopmtc.model.PoliciaisMilitares;
 import br.gov.sp.policiamilitar.bopmtc.model.RequestUser;
 import br.gov.sp.policiamilitar.bopmtc.services.OcorrenciaService;
+import br.gov.sp.policiamilitar.bopmtc.services.PolicialMilitarService;
 import br.gov.sp.policiamilitar.bopmtc.mail.SmtpMailSender;
 
 
@@ -28,17 +30,21 @@ public class HomeController {
 	SmtpMailSender smtpMailSender;
 	
 	@Autowired
-	OcorrenciaService ocorrenciaService;
+	OcorrenciaService ocorrenciaService;	
+
+	@Autowired
+	PolicialMilitarService policialMilitarService;	
 	
 	@GetMapping("")
 	public ModelAndView home(HttpSession session){
-		String codPtr = "07010";
-		String cadPatrulha = "1";
-		String cadOcorrencia = "1";
-		
+		PoliciaisMilitares policiaisMilitares = this.policialMilitarService.obterPolicialLogado(session, SecurityContextHolder.getContext().getAuthentication().getName());
+		session.setAttribute("policiaisMilitares", policiaisMilitares);
+		String codPtr = policiaisMilitares.getUnidadeServico().getIdentificador();
+		String cadPatrulha = String.valueOf(policiaisMilitares.getUnidadeServico().getCadPatrulha());				
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("index");
-		mav.addObject("listaOcorrencias", this.ocorrenciaService.listarOcorrencias(session, codPtr, cadPatrulha, cadOcorrencia));		
+		mav.addObject("dadosPM", policiaisMilitares);
+		mav.addObject("listaOcorrencias", this.ocorrenciaService.listarOcorrencias(session, codPtr, cadPatrulha));	
 		return mav;
 	}
 	
@@ -52,8 +58,10 @@ public class HomeController {
 	}
 	
 	@GetMapping("/exibeMenuSuperior")
-	public ModelAndView exibeMenuSuperior() {		
+	public ModelAndView exibeMenuSuperior(HttpSession session) {	
+		PoliciaisMilitares policiaisMilitares = (PoliciaisMilitares)session.getAttribute("policiaisMilitares");
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("dadosPM", policiaisMilitares);
 		mav.setViewName("fragments/_menuSuperior");
 		return mav;
 	}

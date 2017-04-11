@@ -19,7 +19,7 @@ public class AutenticacaoService {
 	    RestTemplate restTemplate = new RestTemplate();
 	    Autenticacao autenticacaoResult = restTemplate.postForObject( uri, autenticacao, Autenticacao.class);
 	 
-	    System.out.println(autenticacaoResult);
+	   // System.out.println(autenticacaoResult);
 		
 		return autenticacaoResult;
 	}

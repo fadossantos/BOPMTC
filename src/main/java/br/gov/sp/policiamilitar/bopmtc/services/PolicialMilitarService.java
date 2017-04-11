@@ -10,25 +10,25 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import br.gov.sp.policiamilitar.bopmtc.interceptors.HeaderRequestInterceptor;
-import br.gov.sp.policiamilitar.bopmtc.model.OcorrenciaPadrao;
+import br.gov.sp.policiamilitar.bopmtc.model.PoliciaisMilitares;
 
 @Service
-public class OcorrenciaService {
+public class PolicialMilitarService {
 
-	public OcorrenciaPadrao[] listarOcorrencias(HttpSession session, String numeroUnidadeServico, String cadPatrulha) {
-		final String uri = "http://homologa.policiamilitar.sp.gov.br/BOPMTC.ModuloExterno/api/externo/ocorrencia/listar?numeroUnidadeServico=" + numeroUnidadeServico + "&cadPatrulha=" + cadPatrulha;
+	public PoliciaisMilitares obterPolicialLogado(HttpSession session, String cpf) {
+		boolean getTurno = true;
+		boolean getFoto = true;
+		boolean getUnidadeServico = true;
+		final String uri = "http://homologa.policiamilitar.sp.gov.br/BOPMTC.ModuloExterno/api/externo/policialMilitar/obter?CPF=" + cpf + "&foto=" + getFoto+ "&unidadeServico=" + getUnidadeServico + "&turno=" + getTurno;
 		RestTemplate restTemplate = new RestTemplate();
 		List<ClientHttpRequestInterceptor> listInterceptor = new ArrayList<ClientHttpRequestInterceptor>();
 		//String tok = (String)session.getAttribute("Token");
 		//System.out.println(tok);
 		listInterceptor.add(new HeaderRequestInterceptor("Token", (String)session.getAttribute("Token")));
 		restTemplate.setInterceptors(listInterceptor);
-		OcorrenciaPadrao[] listResumoOcorrencia = restTemplate.getForObject( uri, OcorrenciaPadrao[].class);
-	    //for (OcorrenciaPadrao ocrPadrao : listResumoOcorrencia)
-	    //{
-	    //System.out.println(ocrPadrao);
-	    //}
-		return listResumoOcorrencia;
+		PoliciaisMilitares retorno = restTemplate.getForObject( uri, PoliciaisMilitares.class);
+	   // System.out.println(retorno.toString());
+		return retorno;
 	}
 
 }

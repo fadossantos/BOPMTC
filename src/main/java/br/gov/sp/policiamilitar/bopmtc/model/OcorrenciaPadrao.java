@@ -2,6 +2,7 @@
 package br.gov.sp.policiamilitar.bopmtc.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -34,7 +35,7 @@ public class OcorrenciaPadrao {
     @JsonProperty("TipoOrigemComunicacao")
     private String tipoOrigemComunicacao;
     @JsonProperty("DataHoraOcorrencia")
-    private String dataHoraOcorrencia;
+    private Date dataHoraOcorrencia;
     @JsonProperty("CodigoServico")
     private Long codigoServico;
     @JsonProperty("NumeroOcorrencia")
@@ -42,7 +43,7 @@ public class OcorrenciaPadrao {
     @JsonProperty("CadOcorrencia")
     private Long cadOcorrencia;
     @JsonProperty("DataInclusaoBOTC")
-    private String dataInclusaoBOTC;
+    private Date dataInclusaoBOTC;
     @JsonProperty("Envolvidos")
     private List<Envolvido> envolvidos = new ArrayList<Envolvido>();
     @JsonProperty("Veiculos")
@@ -88,7 +89,7 @@ public class OcorrenciaPadrao {
      * @param proprietarioOcorrencia
      * @param envolvidos
      */
-    public OcorrenciaPadrao(Long codigoOcorrenciaBOTC, String tipoOrigemComunicacao, String dataHoraOcorrencia, Long codigoServico, Long numeroOcorrencia, Long cadOcorrencia, String dataInclusaoBOTC, List<Envolvido> envolvidos, List<Veiculo> veiculos, DetalheOcorrencia detalheOcorrencia, OrigemOcorrencia origemOcorrencia, ProprietarioOcorrencia proprietarioOcorrencia, List<Apreenso> apreensoes, RelatorioAutoridade relatorioAutoridade, Operacao operacao, Boolean liberadoFinalizacao) {
+    public OcorrenciaPadrao(Long codigoOcorrenciaBOTC, String tipoOrigemComunicacao, Date dataHoraOcorrencia, Long codigoServico, Long numeroOcorrencia, Long cadOcorrencia, Date dataInclusaoBOTC, List<Envolvido> envolvidos, List<Veiculo> veiculos, DetalheOcorrencia detalheOcorrencia, OrigemOcorrencia origemOcorrencia, ProprietarioOcorrencia proprietarioOcorrencia, List<Apreenso> apreensoes, RelatorioAutoridade relatorioAutoridade, Operacao operacao, Boolean liberadoFinalizacao) {
         super();
         this.codigoOcorrenciaBOTC = codigoOcorrenciaBOTC;
         this.tipoOrigemComunicacao = tipoOrigemComunicacao;
@@ -129,12 +130,12 @@ public class OcorrenciaPadrao {
     }
 
     @JsonProperty("DataHoraOcorrencia")
-    public String getDataHoraOcorrencia() {
+    public Date getDataHoraOcorrencia() {
         return dataHoraOcorrencia;
     }
 
     @JsonProperty("DataHoraOcorrencia")
-    public void setDataHoraOcorrencia(String dataHoraOcorrencia) {
+    public void setDataHoraOcorrencia(Date dataHoraOcorrencia) {
         this.dataHoraOcorrencia = dataHoraOcorrencia;
     }
 
@@ -169,12 +170,12 @@ public class OcorrenciaPadrao {
     }
 
     @JsonProperty("DataInclusaoBOTC")
-    public String getDataInclusaoBOTC() {
+    public Date getDataInclusaoBOTC() {
         return dataInclusaoBOTC;
     }
 
     @JsonProperty("DataInclusaoBOTC")
-    public void setDataInclusaoBOTC(String dataInclusaoBOTC) {
+    public void setDataInclusaoBOTC(Date dataInclusaoBOTC) {
         this.dataInclusaoBOTC = dataInclusaoBOTC;
     }
 

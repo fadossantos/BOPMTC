@@ -55,7 +55,7 @@ public class Veiculo {
     @JsonProperty("Placa")
     private String placa;
     @JsonProperty("UF")
-    private UF_ uF;
+    private UF uF;
     @JsonProperty("Marca")
     private Marca marca;
     @JsonProperty("Cor")
@@ -65,7 +65,7 @@ public class Veiculo {
     @JsonProperty("AnoModelo")
     private Long anoModelo;
     @JsonProperty("Municipio")
-    private Municipio_ municipio;
+    private Municipio municipio;
     @JsonProperty("Chassi")
     private String chassi;
     @JsonProperty("Categoria")
@@ -108,7 +108,7 @@ public class Veiculo {
      * @param identificadorVeiculoSegurado
      * @param codigoSequencialEnvolvido
      */
-    public Veiculo(Long codigoSequencial, Long codigoSequencialEnvolvido, Long numeroVeiculoSIOPM, Long codigoSituacaoVeiculo, Long codigoTipoVeiculo, Long codigoGrupoTipoVeiculo, Long danoVeiculo, String identificadorVeiculoSegurado, Long renavam, String placa, UF_ uF, Marca marca, Cor cor, Long anoFabricacao, Long anoModelo, Municipio_ municipio, String chassi, Categoria categoria, List<ListaAvarium> listaAvaria, String observacao, String proprietarioNome) {
+    public Veiculo(Long codigoSequencial, Long codigoSequencialEnvolvido, Long numeroVeiculoSIOPM, Long codigoSituacaoVeiculo, Long codigoTipoVeiculo, Long codigoGrupoTipoVeiculo, Long danoVeiculo, String identificadorVeiculoSegurado, Long renavam, String placa, UF uF, Marca marca, Cor cor, Long anoFabricacao, Long anoModelo, Municipio municipio, String chassi, Categoria categoria, List<ListaAvarium> listaAvaria, String observacao, String proprietarioNome) {
         super();
         this.codigoSequencial = codigoSequencial;
         this.codigoSequencialEnvolvido = codigoSequencialEnvolvido;
@@ -234,12 +234,12 @@ public class Veiculo {
     }
 
     @JsonProperty("UF")
-    public UF_ getUF() {
+    public UF getUF() {
         return uF;
     }
 
     @JsonProperty("UF")
-    public void setUF(UF_ uF) {
+    public void setUF(UF uF) {
         this.uF = uF;
     }
 
@@ -284,12 +284,12 @@ public class Veiculo {
     }
 
     @JsonProperty("Municipio")
-    public Municipio_ getMunicipio() {
+    public Municipio getMunicipio() {
         return municipio;
     }
 
     @JsonProperty("Municipio")
-    public void setMunicipio(Municipio_ municipio) {
+    public void setMunicipio(Municipio municipio) {
         this.municipio = municipio;
     }
 

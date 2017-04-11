@@ -33,7 +33,7 @@ public class DetalheOcorrencia {
     @JsonProperty("DataHoraFato")
     private String dataHoraFato;
     @JsonProperty("Logradouro")
-    private Logradouro_ logradouro;
+    private Logradouro logradouro;
     @JsonProperty("CodigoLocal")
     private String codigoLocal;
     @JsonProperty("CodigoLocalComplemento")
@@ -90,7 +90,7 @@ public class DetalheOcorrencia {
      * @param codigoTipoTrecho
      * @param codigoLocal
      */
-    public DetalheOcorrencia(Long ncdFinal, String dataHoraFato, Logradouro_ logradouro, String codigoLocal, Long codigoLocalComplemento, String dataHoraChegadaLocal, String dataHoraSaidaFinal, Long codigoLocalDetalhe, String localAmbiente, Boolean localPreservado, Long codigoIluminacao, Long codigoTempo, Long codigoSemaforo, Long codigoCondicaoPista, Long codigoTipoTrecho, Long latitudeFinal, Long longitudeFinal) {
+    public DetalheOcorrencia(Long ncdFinal, String dataHoraFato, Logradouro logradouro, String codigoLocal, Long codigoLocalComplemento, String dataHoraChegadaLocal, String dataHoraSaidaFinal, Long codigoLocalDetalhe, String localAmbiente, Boolean localPreservado, Long codigoIluminacao, Long codigoTempo, Long codigoSemaforo, Long codigoCondicaoPista, Long codigoTipoTrecho, Long latitudeFinal, Long longitudeFinal) {
         super();
         this.ncdFinal = ncdFinal;
         this.dataHoraFato = dataHoraFato;
@@ -132,12 +132,12 @@ public class DetalheOcorrencia {
     }
 
     @JsonProperty("Logradouro")
-    public Logradouro_ getLogradouro() {
+    public Logradouro getLogradouro() {
         return logradouro;
     }
 
     @JsonProperty("Logradouro")
-    public void setLogradouro(Logradouro_ logradouro) {
+    public void setLogradouro(Logradouro logradouro) {
         this.logradouro = logradouro;
     }
 

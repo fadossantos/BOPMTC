@@ -33,7 +33,7 @@ public class OrigemOcorrencia {
     @JsonProperty("NcdInicial")
     private Long ncdInicial;
     @JsonProperty("Logradouro")
-    private Logradouro__ logradouro;
+    private Logradouro logradouro;
     @JsonProperty("Solicitante")
     private String solicitante;
     @JsonProperty("AtendimentoInicial")
@@ -74,7 +74,7 @@ public class OrigemOcorrencia {
      * @param prioridade
      * @param distritoPolicial
      */
-    public OrigemOcorrencia(String prioridade, String status, String dataGeracaoOcorrencia, Long ncdInicial, Logradouro__ logradouro, String solicitante, String atendimentoInicial, String distritoPolicial, String historicoInicial, String reiteracoes, Long oPM, Long latitudeInicial, Long longitudeInicial) {
+    public OrigemOcorrencia(String prioridade, String status, String dataGeracaoOcorrencia, Long ncdInicial, Logradouro logradouro, String solicitante, String atendimentoInicial, String distritoPolicial, String historicoInicial, String reiteracoes, Long oPM, Long latitudeInicial, Long longitudeInicial) {
         super();
         this.prioridade = prioridade;
         this.status = status;
@@ -132,12 +132,12 @@ public class OrigemOcorrencia {
     }
 
     @JsonProperty("Logradouro")
-    public Logradouro__ getLogradouro() {
+    public Logradouro getLogradouro() {
         return logradouro;
     }
 
     @JsonProperty("Logradouro")
-    public void setLogradouro(Logradouro__ logradouro) {
+    public void setLogradouro(Logradouro logradouro) {
         this.logradouro = logradouro;
     }
 
