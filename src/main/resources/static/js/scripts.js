@@ -100,10 +100,11 @@ $(document).on({
 	}
 });
 
-$(document).ready(function() {
+function navClick() {
+	if (document.getElementById("menuLateral").style.width == "250px")
+    document.getElementById("menuLateral").style.width = "0px";
+    else 
+    document.getElementById("menuLateral").style.width = "250px";
+    
+}
 
-	$('[data-toggle=offcanvas]').click(function() {
-		$('.row-offcanvas').toggleClass('active');
-	});
-
-});

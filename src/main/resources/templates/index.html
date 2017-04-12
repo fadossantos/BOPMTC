@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
+<!-- Required meta tags -->
 <meta charset="utf-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="description" content="" />
-<meta name="author" content="" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
 <title>BOPMTC - Protótipo Web</title>
 
@@ -16,34 +13,86 @@
 </head>
 
 <body>
-	<div id="barraSuperior">
-		<nav
-			class="navbar navbar-fixed-top navbar-toggleable-sm navbar-inverse bg-primary mb-3">
-			<button class="navbar-toggler navbar-toggler-right" type="button"
-				data-toggle="collapse" data-target="#menuSuperior">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="flex-row d-flex">
-				<button type="button" class="hidden-md-up navbar-toggler"
-					data-toggle="offcanvas" title="Toggle responsive left sidebar">
-					<span class="navbar-toggler-icon"></span>
+
+	<div id="barraSuperior" class="container-fluid">
+		<div
+			class="row navbar-inverse fixed-top bg-primary align-items-center"
+			style="text-align: center;">
+			<div class="col-3 col-sm-2 col-md-2 col-lg-1 col-xl-1"
+				style="text-align:center;padding-left:20px;">
+				<button class="btn btn-outline-secondary my-2 my-sm-0"
+					style="height: 40px; width: 60px;" onclick="navClick()">
+
+					<i class="fa fa-bars" aria-hidden="true"></i>
+
 				</button>
-				<a class="navbar-brand mb-1" href="#"><img
-					src="static/images/policia_symbol.png" height="25" width="30" />
-					PMESP</a>
+			</div>
+			<div class="col-6 col-sm-8 col-md-8 col-lg-10 col-xl-10 "
+				style="text-align: center;">
+
+				<svg class="" width="120" height="60" viewBox="0 0 30 15"
+					style="margin-bottom: -7px;">
+							
+							<polygon points="6,0 30,0 24,15 0,15" style="fill:#ffffff;" />
+								<image xlink:href="/static/images/policia_symbol.png"
+						height="100%" width="100%" />   
+	
+				</svg>
 
 			</div>
-			<div id="menuSuperior" th:replace="fragments/_menuSuperior"></div>
-		</nav>
-	</div>
-	<div class="container-fluid" id="main">
-		<div class="row row-offcanvas row-offcanvas-left">
-			<div id="menuLateral"></div>
-			<div class="col-md-9 col-lg-9 col-md-offset-3 container main">
-				<div id="corpoPagina" th:replace="ocorrencias/listarOcorrencias">
-				</div>
+			<div class="col-3 col-sm-2 col-md-2 col-lg-1 col-xl-1 "
+				style="text-align:center;padding-right:20px;">
+				<button class="btn btn-outline-secondary my-2 my-sm-0 "
+					style="height: 40px; width: 60px;" onclick="navClick()">
+					<i class="fa fa-search" aria-hidden="true"></i>
+				</button>
 			</div>
+
 		</div>
+	</div>
+
+
+	<div id="menuLateral" class="sidenav">
+		<div class="container-fluid">
+			<ul class="nav flex-column">
+				<li class="nav-item"><button class="btn btn-secondary"
+						style="height: 60px; width: 100%;" type="button">
+						<table width="100%" >
+							<tr>
+								<th rowspan="2"><img
+									th:src="'data:image/jpeg;base64,' + ${dadosPM.foto}"
+									alt="HTML5 Icon" width="40" height="40"
+									th:class="rounded-circle" /></th>
+								<td align="left"><span th:text="'  ' + ${dadosPM.posto.sigla}" >posto</span></td>
+							</tr>
+							<tr>
+							<td align="left">
+							<span th:text= "'  ' + ${dadosPM.nomeGuerra}">nome</span>
+							</td>
+							</tr>
+							
+						</table>
+					</button></li>
+				<div class="dropdown-divider"></div>
+				<li class="nav-item"><a class="btn btn-secondary align-items-center"
+						style="height: 60px; width: 100%;" href="/logout">
+						<table width="100%" align="center" class="centralizado">
+							<tr>
+								<th><i class="fa fa-power-off" /></th>
+								<td align="left"><span>Sair</span></td>
+							</tr>
+						</table>
+					</a></li>
+				<div class="dropdown-divider"></div>
+			</ul>
+		</div>
+
+
+	</div>
+
+
+	<div id="corpoPagina" th:replace="ocorrencias/listarOcorrencias">
+		
 	</div>
 
 

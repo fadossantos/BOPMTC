@@ -1,18 +1,74 @@
-<div class="col-md-3 col-lg-2 sidebar-offcanvas" id="menuLateral"
-	role="navigation">
-	<ul class="nav flex-column pl-1">
-		<li class="nav-item"><a class="nav-link" href="#">Item 1</a></li>
-		<li class="nav-item"><a class="nav-link" href="#submenu1"
-			data-toggle="collapse" data-target="#submenu1">Item 2</a>
-			<ul class="list-unstyled flex-column pl-3 collapse" id="submenu1"
-				aria-expanded="false">
-				<li class="nav-item"><a class="nav-link" href="">Sub item
-						2.1</a></li>
-				<li class="nav-item"><a class="nav-link" href="">Sub item
-						2.2</a></li>
-			</ul></li>
-		<li class="nav-item"><a class="nav-link" href="#">Item 3</a></li>
-		<li class="nav-item"><a class="nav-link" href="#">Item 4</a></li>
 
-	</ul>
+<div id="menuLateral" class="sidenav">
+	<div class="container-fluid">
+		<ul class="nav flex-column">
+			<li class="nav-item"><button class="btn btn-secondary"
+					style="height: 60px; width: 100%;" type="button">
+					<table>
+						<tr>
+							<th rowspan="2"><img
+								th:src="'data:image/jpeg;base64,' + ${dadosPM.foto}"
+								alt="HTML5 Icon" width="30" height="30"
+								th:class="rounded-circle" /></th>
+							<td><span th:text="'  ' + ${dadosPM.posto.sigla}">posto</span></td>
+						</tr>
+						<tr>
+							<td><span th:text="'  ' + ${dadosPM.nomeGuerra}">nome</span></td>
+						</tr>
+					</table>
+				</button></li>
+				<div class="dropdown-divider"></div>
+				<li class="nav-item"><button class="btn btn-secondary"
+					style="height: 60px; width: 100%;" type="button">
+					<table>
+						<tr>
+							<th><i class="fa fa-pencil-square-o"/></th>
+							<td><span th:text="'  ' + ${dadosPM.posto.sigla}">Dados da Ocorrência</span></td>
+						</tr>						
+					</table>
+				</button></li>
+				<div class="dropdown-divider"></div>
+				<li class="nav-item"><button class="btn btn-secondary"
+					style="height: 60px; width: 100%;" type="button">
+					<table>
+						<tr>
+							<th><i class="fa fa-users"/></th>
+							<td><span th:text="'  ' + ${dadosPM.posto.sigla}">Envolvidos</span></td>
+						</tr>						
+					</table>
+				</button></li>
+				<div class="dropdown-divider"></div>
+				<li class="nav-item"><button class="btn btn-secondary"
+					style="height: 60px; width: 100%;" type="button">
+					<table>
+						<tr>
+							<th><i class="fa fa-car"/></th>
+							<td><span th:text="'  ' + ${dadosPM.posto.sigla}">Veículos</span></td>
+						</tr>						
+					</table>
+				</button></li>
+				<div class="dropdown-divider"></div>
+				<li class="nav-item"><button class="btn btn-secondary"
+					style="height: 60px; width: 100%;" type="button">
+					<table>
+						<tr>
+							<th><i class="fa fa-inbox"/></th>
+							<td><span th:text="'  ' + ${dadosPM.posto.sigla}">Apreensões</span></td>
+						</tr>						
+					</table>
+				</button></li>
+				<div class="dropdown-divider"></div>
+				<li class="nav-item"><button class="btn btn-secondary"
+					style="height: 60px; width: 100%;" type="button">
+					<table>
+						<tr>
+							<th><i class="fa fa-power-off "/></th>
+							<td><span th:text="'  ' + ${dadosPM.posto.sigla}">Sair</span></td>
+						</tr>						
+					</table>
+				</button></li>
+				<div class="dropdown-divider"></div>
+
+		</ul>
+	</div>
 </div>

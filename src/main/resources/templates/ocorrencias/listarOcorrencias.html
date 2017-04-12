@@ -1,6 +1,7 @@
-<div id="corpoPagina">
-	<div class="row">
-		<div class="card col-lg-5" th:each="ocorrencia : ${listaOcorrencias}" style="margin-bottom:15px; margin-left:15px; margin-right:15px;">
+<div id="corpoPagina" class="row">
+	<div class="col-12">
+		<div class="card col-5" th:each="ocorrencia : ${listaOcorrencias}"
+			style="margin-bottom: 15px; margin-left: 15px; margin-right: 15px;">
 
 			<div class="card-block">
 				<span> <svg width="40" height="40"
@@ -45,10 +46,8 @@
 					th:text="${ocorrencia.origemOcorrencia.logradouro.endereco} + ', ' + ${ocorrencia.origemOcorrencia.logradouro.numero} + ' - ' + 
 					${ocorrencia.origemOcorrencia.logradouro.bairro.descricao} + ' - ' + ${ocorrencia.origemOcorrencia.logradouro.municipio.descricao}">Nat
 					inicial</h6>
-				
-			</div>
 
+			</div>
 		</div>
 	</div>
-	
 </div>

@@ -1,3 +1,28 @@
+.sidenav {
+    height: 100%;
+    width: 0px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #ffffff;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 20px;
+    margin-top: 50px;
+}
+
+.centralizado {
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
 .Absolute-Center {
   margin: auto;
   position: absolute;
@@ -21,86 +46,6 @@ body.modal-open {
     padding-right:0 !important;
 }
 
-#sidebar {
-   padding-left:0;
-}
-
-/*
- * Off Canvas at medium breakpoint
- * --------------------------------------------------
- */
-@media screen and (max-width: 48em) {
-
-  .row-offcanvas {
-    position: relative;
-    -webkit-transition: all 0.25s ease-out;
-    -moz-transition: all 0.25s ease-out;
-    transition: all 0.25s ease-out;
-  }
-
-  .row-offcanvas-left
-  .sidebar-offcanvas {
-    left: -33%;
-  }
-
-  .row-offcanvas-left.active {
-    left: 33%;
-    margin-left: -6px;
-  }
-
-  .sidebar-offcanvas {
-    position: absolute;
-    top: 0;
-    width: 33%;
-    height: 100%;
-  }
-}
-
-/*
- * Off Canvas wider at sm breakpoint
- * --------------------------------------------------
- */
-@media screen and (max-width: 34em) {
-  .row-offcanvas-left
-  .sidebar-offcanvas {
-    left: -45%;
-  }
-
-  .row-offcanvas-left.active {
-    left: 45%;
-    margin-left: -6px;
-  }
-  
-  .sidebar-offcanvas {
-    width: 45%;
-  }
-}
-
-.card {
-    overflow:hidden;
-}
-
-.card-block .rotate {
-    z-index: 8;
-    float: right;
-    height: 100%;
-}
-
-.card-block .rotate i {
-    color: rgba(20, 20, 20, 0.15);
-    position: absolute;
-    left: 0;
-    left: auto;
-    right: -10px;
-    bottom: 0;
-    display: block;
-    -webkit-transform: rotate(-44deg);
-    -moz-transform: rotate(-44deg);
-    -o-transform: rotate(-44deg);
-    -ms-transform: rotate(-44deg);
-    transform: rotate(-44deg);
-}
-
 .multiselect-container {
         width: 100%;
         height: 30;
@@ -110,9 +55,6 @@ body.modal-open {
      white-space: normal;
 }
 
-.panel-body {
-	overflow:auto;
-}
 
 .fieldError {
 	border: 1px solid red;
