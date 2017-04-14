@@ -13,9 +13,9 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
     "CodigoSequencial",
     "CodigoSequencialEnvolvido",
     "NumeroVeiculoSIOPM",
-    "CodigoSituacaoVeiculo",
-    "CodigoTipoVeiculo",
-    "CodigoGrupoTipoVeiculo",
+    "SituacaoOcorrencia",
+    "TipoVeiculo",
+    "GrupoTipoVeiculo",
     "DanoVeiculo",
     "IdentificadorVeiculoSegurado",
     "Renavam",
@@ -30,7 +30,9 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
     "Categoria",
     "ListaAvaria",
     "Observacao",
-    "ProprietarioNome"
+    "ProprietarioNome",
+    "ProprietarioCpf",
+    "NumeroProprietarioSIOPM"
 })
 public class Veiculo {
 
@@ -40,12 +42,12 @@ public class Veiculo {
     private Long codigoSequencialEnvolvido;
     @JsonProperty("NumeroVeiculoSIOPM")
     private Long numeroVeiculoSIOPM;
-    @JsonProperty("CodigoSituacaoVeiculo")
-    private Long codigoSituacaoVeiculo;
-    @JsonProperty("CodigoTipoVeiculo")
-    private Long codigoTipoVeiculo;
-    @JsonProperty("CodigoGrupoTipoVeiculo")
-    private Long codigoGrupoTipoVeiculo;
+    @JsonProperty("SituacaoOcorrencia")
+    private SituacaoOcorrencia situacaoOcorrencia;
+    @JsonProperty("TipoVeiculo")
+    private TipoVeiculo tipoVeiculo;
+    @JsonProperty("GrupoTipoVeiculo")
+    private GrupoTipoVeiculo grupoTipoVeiculo;
     @JsonProperty("DanoVeiculo")
     private Long danoVeiculo;
     @JsonProperty("IdentificadorVeiculoSegurado")
@@ -57,7 +59,7 @@ public class Veiculo {
     @JsonProperty("UF")
     private UF uF;
     @JsonProperty("Marca")
-    private Marca marca;
+    private MarcaVeiculo marca;
     @JsonProperty("Cor")
     private Cor cor;
     @JsonProperty("AnoFabricacao")
@@ -76,6 +78,10 @@ public class Veiculo {
     private String observacao;
     @JsonProperty("ProprietarioNome")
     private String proprietarioNome;
+    @JsonProperty("ProprietarioCpf")
+    private Long proprietarioCpf;
+    @JsonProperty("NumeroProprietarioSIOPM")
+    private Long numeroProprietarioSIOPM;
 
     /**
      * No args constructor for use in serialization
@@ -87,7 +93,7 @@ public class Veiculo {
     /**
      * 
      * @param anoFabricacao
-     * @param codigoSituacaoVeiculo
+     * @param grupoTipoVeiculo
      * @param cor
      * @param codigoSequencial
      * @param danoVeiculo
@@ -97,25 +103,27 @@ public class Veiculo {
      * @param numeroVeiculoSIOPM
      * @param listaAvaria
      * @param observacao
+     * @param proprietarioCpf
      * @param categoria
+     * @param situacaoOcorrencia
      * @param proprietarioNome
      * @param municipio
      * @param chassi
-     * @param codigoGrupoTipoVeiculo
+     * @param numeroProprietarioSIOPM
      * @param placa
      * @param anoModelo
-     * @param codigoTipoVeiculo
+     * @param tipoVeiculo
      * @param identificadorVeiculoSegurado
      * @param codigoSequencialEnvolvido
      */
-    public Veiculo(Long codigoSequencial, Long codigoSequencialEnvolvido, Long numeroVeiculoSIOPM, Long codigoSituacaoVeiculo, Long codigoTipoVeiculo, Long codigoGrupoTipoVeiculo, Long danoVeiculo, String identificadorVeiculoSegurado, Long renavam, String placa, UF uF, Marca marca, Cor cor, Long anoFabricacao, Long anoModelo, Municipio municipio, String chassi, Categoria categoria, List<ListaAvarium> listaAvaria, String observacao, String proprietarioNome) {
+    public Veiculo(Long codigoSequencial, Long codigoSequencialEnvolvido, Long numeroVeiculoSIOPM, SituacaoOcorrencia situacaoOcorrencia, TipoVeiculo tipoVeiculo, GrupoTipoVeiculo grupoTipoVeiculo, Long danoVeiculo, String identificadorVeiculoSegurado, Long renavam, String placa, UF uF, MarcaVeiculo marca, Cor cor, Long anoFabricacao, Long anoModelo, Municipio municipio, String chassi, Categoria categoria, List<ListaAvarium> listaAvaria, String observacao, String proprietarioNome, Long proprietarioCpf, Long numeroProprietarioSIOPM) {
         super();
         this.codigoSequencial = codigoSequencial;
         this.codigoSequencialEnvolvido = codigoSequencialEnvolvido;
         this.numeroVeiculoSIOPM = numeroVeiculoSIOPM;
-        this.codigoSituacaoVeiculo = codigoSituacaoVeiculo;
-        this.codigoTipoVeiculo = codigoTipoVeiculo;
-        this.codigoGrupoTipoVeiculo = codigoGrupoTipoVeiculo;
+        this.situacaoOcorrencia = situacaoOcorrencia;
+        this.tipoVeiculo = tipoVeiculo;
+        this.grupoTipoVeiculo = grupoTipoVeiculo;
         this.danoVeiculo = danoVeiculo;
         this.identificadorVeiculoSegurado = identificadorVeiculoSegurado;
         this.renavam = renavam;
@@ -131,6 +139,8 @@ public class Veiculo {
         this.listaAvaria = listaAvaria;
         this.observacao = observacao;
         this.proprietarioNome = proprietarioNome;
+        this.proprietarioCpf = proprietarioCpf;
+        this.numeroProprietarioSIOPM = numeroProprietarioSIOPM;
     }
 
     @JsonProperty("CodigoSequencial")
@@ -163,34 +173,34 @@ public class Veiculo {
         this.numeroVeiculoSIOPM = numeroVeiculoSIOPM;
     }
 
-    @JsonProperty("CodigoSituacaoVeiculo")
-    public Long getCodigoSituacaoVeiculo() {
-        return codigoSituacaoVeiculo;
+    @JsonProperty("SituacaoOcorrencia")
+    public SituacaoOcorrencia getSituacaoOcorrencia() {
+        return situacaoOcorrencia;
     }
 
-    @JsonProperty("CodigoSituacaoVeiculo")
-    public void setCodigoSituacaoVeiculo(Long codigoSituacaoVeiculo) {
-        this.codigoSituacaoVeiculo = codigoSituacaoVeiculo;
+    @JsonProperty("SituacaoOcorrencia")
+    public void setSituacaoOcorrencia(SituacaoOcorrencia situacaoOcorrencia) {
+        this.situacaoOcorrencia = situacaoOcorrencia;
     }
 
-    @JsonProperty("CodigoTipoVeiculo")
-    public Long getCodigoTipoVeiculo() {
-        return codigoTipoVeiculo;
+    @JsonProperty("TipoVeiculo")
+    public TipoVeiculo getTipoVeiculo() {
+        return tipoVeiculo;
     }
 
-    @JsonProperty("CodigoTipoVeiculo")
-    public void setCodigoTipoVeiculo(Long codigoTipoVeiculo) {
-        this.codigoTipoVeiculo = codigoTipoVeiculo;
+    @JsonProperty("TipoVeiculo")
+    public void setTipoVeiculo(TipoVeiculo tipoVeiculo) {
+        this.tipoVeiculo = tipoVeiculo;
     }
 
-    @JsonProperty("CodigoGrupoTipoVeiculo")
-    public Long getCodigoGrupoTipoVeiculo() {
-        return codigoGrupoTipoVeiculo;
+    @JsonProperty("GrupoTipoVeiculo")
+    public GrupoTipoVeiculo getGrupoTipoVeiculo() {
+        return grupoTipoVeiculo;
     }
 
-    @JsonProperty("CodigoGrupoTipoVeiculo")
-    public void setCodigoGrupoTipoVeiculo(Long codigoGrupoTipoVeiculo) {
-        this.codigoGrupoTipoVeiculo = codigoGrupoTipoVeiculo;
+    @JsonProperty("GrupoTipoVeiculo")
+    public void setGrupoTipoVeiculo(GrupoTipoVeiculo grupoTipoVeiculo) {
+        this.grupoTipoVeiculo = grupoTipoVeiculo;
     }
 
     @JsonProperty("DanoVeiculo")
@@ -244,12 +254,12 @@ public class Veiculo {
     }
 
     @JsonProperty("Marca")
-    public Marca getMarca() {
+    public MarcaVeiculo getMarca() {
         return marca;
     }
 
     @JsonProperty("Marca")
-    public void setMarca(Marca marca) {
+    public void setMarca(MarcaVeiculo marca) {
         this.marca = marca;
     }
 
@@ -341,6 +351,26 @@ public class Veiculo {
     @JsonProperty("ProprietarioNome")
     public void setProprietarioNome(String proprietarioNome) {
         this.proprietarioNome = proprietarioNome;
+    }
+
+    @JsonProperty("ProprietarioCpf")
+    public Long getProprietarioCpf() {
+        return proprietarioCpf;
+    }
+
+    @JsonProperty("ProprietarioCpf")
+    public void setProprietarioCpf(Long proprietarioCpf) {
+        this.proprietarioCpf = proprietarioCpf;
+    }
+
+    @JsonProperty("NumeroProprietarioSIOPM")
+    public Long getNumeroProprietarioSIOPM() {
+        return numeroProprietarioSIOPM;
+    }
+
+    @JsonProperty("NumeroProprietarioSIOPM")
+    public void setNumeroProprietarioSIOPM(Long numeroProprietarioSIOPM) {
+        this.numeroProprietarioSIOPM = numeroProprietarioSIOPM;
     }
 
     @Override

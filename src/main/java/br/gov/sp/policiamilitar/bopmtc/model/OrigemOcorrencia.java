@@ -1,10 +1,18 @@
 
 package br.gov.sp.policiamilitar.bopmtc.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+import br.gov.sp.policiamilitar.bopmtc.model.localdb.NCD;
+import br.gov.sp.policiamilitar.bopmtc.services.NCDService;
+
+import java.util.Date;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -23,15 +31,19 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
     "LongitudeInicial"
 })
 public class OrigemOcorrencia {
-
+	
     @JsonProperty("Prioridade")
     private String prioridade;
     @JsonProperty("Status")
     private String status;
     @JsonProperty("DataGeracaoOcorrencia")
-    private String dataGeracaoOcorrencia;
+    private Date dataGeracaoOcorrencia;
     @JsonProperty("NcdInicial")
     private Long ncdInicial;
+    
+    @JsonIgnore
+    private NCD ncdInicialObj;
+    
     @JsonProperty("Logradouro")
     private Logradouro logradouro;
     @JsonProperty("Solicitante")
@@ -56,6 +68,7 @@ public class OrigemOcorrencia {
      * 
      */
     public OrigemOcorrencia() {
+    	this.ncdInicialObj = new NCD();
     }
 
     /**
@@ -74,12 +87,14 @@ public class OrigemOcorrencia {
      * @param prioridade
      * @param distritoPolicial
      */
-    public OrigemOcorrencia(String prioridade, String status, String dataGeracaoOcorrencia, Long ncdInicial, Logradouro logradouro, String solicitante, String atendimentoInicial, String distritoPolicial, String historicoInicial, String reiteracoes, Long oPM, Long latitudeInicial, Long longitudeInicial) {
+    public OrigemOcorrencia(String prioridade, String status, Date dataGeracaoOcorrencia, Long ncdInicial, Logradouro logradouro, String solicitante, String atendimentoInicial, String distritoPolicial, String historicoInicial, String reiteracoes, Long oPM, Long latitudeInicial, Long longitudeInicial) {
         super();
         this.prioridade = prioridade;
         this.status = status;
         this.dataGeracaoOcorrencia = dataGeracaoOcorrencia;
         this.ncdInicial = ncdInicial;
+        this.ncdInicialObj = new NCD();
+        this.ncdInicialObj.setNcdCod(ncdInicial);
         this.logradouro = logradouro;
         this.solicitante = solicitante;
         this.atendimentoInicial = atendimentoInicial;
@@ -112,12 +127,12 @@ public class OrigemOcorrencia {
     }
 
     @JsonProperty("DataGeracaoOcorrencia")
-    public String getDataGeracaoOcorrencia() {
+    public Date getDataGeracaoOcorrencia() {
         return dataGeracaoOcorrencia;
     }
 
     @JsonProperty("DataGeracaoOcorrencia")
-    public void setDataGeracaoOcorrencia(String dataGeracaoOcorrencia) {
+    public void setDataGeracaoOcorrencia(Date dataGeracaoOcorrencia) {
         this.dataGeracaoOcorrencia = dataGeracaoOcorrencia;
     }
 
@@ -129,7 +144,18 @@ public class OrigemOcorrencia {
     @JsonProperty("NcdInicial")
     public void setNcdInicial(Long ncdInicial) {
         this.ncdInicial = ncdInicial;
+        this.ncdInicialObj.setNcdCod(this.ncdInicial);        
     }
+    
+    @JsonIgnore
+    public NCD getNcdInicialObj() {
+        return this.ncdInicialObj;
+    }
+
+    @JsonIgnore
+    public void setNcdInicialObj(NCD ncdInicialObj) {
+        this.ncdInicialObj = ncdInicialObj;
+    }    
 
     @JsonProperty("Logradouro")
     public Logradouro getLogradouro() {
@@ -220,7 +246,7 @@ public class OrigemOcorrencia {
     public void setLongitudeInicial(Long longitudeInicial) {
         this.longitudeInicial = longitudeInicial;
     }
-
+      
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this);

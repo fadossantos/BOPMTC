@@ -19,16 +19,25 @@ public class PolicialMilitarService {
 		boolean getTurno = true;
 		boolean getFoto = true;
 		boolean getUnidadeServico = true;
-		final String uri = "http://homologa.policiamilitar.sp.gov.br/BOPMTC.ModuloExterno/api/externo/policialMilitar/obter?CPF=" + cpf + "&foto=" + getFoto+ "&unidadeServico=" + getUnidadeServico + "&turno=" + getTurno;
-		RestTemplate restTemplate = new RestTemplate();
-		List<ClientHttpRequestInterceptor> listInterceptor = new ArrayList<ClientHttpRequestInterceptor>();
-		//String tok = (String)session.getAttribute("Token");
-		//System.out.println(tok);
-		listInterceptor.add(new HeaderRequestInterceptor("Token", (String)session.getAttribute("Token")));
-		restTemplate.setInterceptors(listInterceptor);
-		PoliciaisMilitares retorno = restTemplate.getForObject( uri, PoliciaisMilitares.class);
-	   // System.out.println(retorno.toString());
+		PoliciaisMilitares retorno = null;
+		try {
+			retorno = (PoliciaisMilitares) session.getAttribute("policiaisMilitares");
+		} catch (Exception e) {
+			System.out.println("Não Havia o objeto PoliciaisMilitares na sessão.");
+		}
+		if (retorno == null) {
+			final String uri = "http://homologa.policiamilitar.sp.gov.br/BOPMTC.ModuloExterno/api/externo/policialMilitar/obter?CPF="
+					+ cpf + "&foto=" + getFoto + "&unidadeServico=" + getUnidadeServico + "&turno=" + getTurno;
+			RestTemplate restTemplate = new RestTemplate();
+			List<ClientHttpRequestInterceptor> listInterceptor = new ArrayList<ClientHttpRequestInterceptor>();
+			listInterceptor.add(new HeaderRequestInterceptor("Token", (String) session.getAttribute("Token")));
+			restTemplate.setInterceptors(listInterceptor);
+			retorno = restTemplate.getForObject(uri, PoliciaisMilitares.class);
+			session.setAttribute("policiaisMilitares", retorno);
+			session.setAttribute("listaOcorrencias", null);
+		}
 		return retorno;
 	}
+	
 
 }

@@ -4,6 +4,8 @@ package br.gov.sp.policiamilitar.bopmtc.model;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -14,7 +16,6 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
     "CodigoOcorrenciaBOTC",
     "TipoOrigemComunicacao",
     "DataHoraOcorrencia",
-    "CodigoServico",
     "NumeroOcorrencia",
     "CadOcorrencia",
     "DataInclusaoBOTC",
@@ -24,9 +25,12 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
     "OrigemOcorrencia",
     "ProprietarioOcorrencia",
     "Apreensoes",
+    "Anexos",
     "RelatorioAutoridade",
+    "Comarca",
     "Operacao",
-    "LiberadoFinalizacao"
+    "LiberadoFinalizacao",
+    "CodigoResultadoEncerramento"
 })
 public class OcorrenciaPadrao {
 
@@ -36,8 +40,8 @@ public class OcorrenciaPadrao {
     private String tipoOrigemComunicacao;
     @JsonProperty("DataHoraOcorrencia")
     private Date dataHoraOcorrencia;
-    @JsonProperty("CodigoServico")
-    private Long codigoServico;
+    @JsonIgnore
+    private Long dataHoraOcorrenciaAbsoluta;
     @JsonProperty("NumeroOcorrencia")
     private Long numeroOcorrencia;
     @JsonProperty("CadOcorrencia")
@@ -55,13 +59,19 @@ public class OcorrenciaPadrao {
     @JsonProperty("ProprietarioOcorrencia")
     private ProprietarioOcorrencia proprietarioOcorrencia;
     @JsonProperty("Apreensoes")
-    private List<Apreenso> apreensoes = new ArrayList<Apreenso>();
+    private List<Apreensao> apreensoes = new ArrayList<Apreensao>();
+    @JsonProperty("Anexos")
+    private List<Anexo> anexos = new ArrayList<Anexo>();
     @JsonProperty("RelatorioAutoridade")
     private RelatorioAutoridade relatorioAutoridade;
+    @JsonProperty("Comarca")
+    private Comarca comarca;
     @JsonProperty("Operacao")
     private Operacao operacao;
     @JsonProperty("LiberadoFinalizacao")
     private Boolean liberadoFinalizacao;
+    @JsonProperty("CodigoResultadoEncerramento")
+    private Long codigoResultadoEncerramento;
 
     /**
      * No args constructor for use in serialization
@@ -72,29 +82,30 @@ public class OcorrenciaPadrao {
 
     /**
      * 
-     * @param apreensoes
+     * @param codigoResultadoEncerramento
      * @param codigoOcorrenciaBOTC
+     * @param apreensoes
      * @param tipoOrigemComunicacao
      * @param cadOcorrencia
      * @param detalheOcorrencia
      * @param dataHoraOcorrencia
      * @param operacao
-     * @param codigoServico
      * @param veiculos
      * @param relatorioAutoridade
+     * @param anexos
      * @param numeroOcorrencia
      * @param dataInclusaoBOTC
      * @param liberadoFinalizacao
      * @param origemOcorrencia
      * @param proprietarioOcorrencia
+     * @param comarca
      * @param envolvidos
      */
-    public OcorrenciaPadrao(Long codigoOcorrenciaBOTC, String tipoOrigemComunicacao, Date dataHoraOcorrencia, Long codigoServico, Long numeroOcorrencia, Long cadOcorrencia, Date dataInclusaoBOTC, List<Envolvido> envolvidos, List<Veiculo> veiculos, DetalheOcorrencia detalheOcorrencia, OrigemOcorrencia origemOcorrencia, ProprietarioOcorrencia proprietarioOcorrencia, List<Apreenso> apreensoes, RelatorioAutoridade relatorioAutoridade, Operacao operacao, Boolean liberadoFinalizacao) {
+    public OcorrenciaPadrao(Long codigoOcorrenciaBOTC, String tipoOrigemComunicacao, Date dataHoraOcorrencia, Long numeroOcorrencia, Long cadOcorrencia, Date dataInclusaoBOTC, List<Envolvido> envolvidos, List<Veiculo> veiculos, DetalheOcorrencia detalheOcorrencia, OrigemOcorrencia origemOcorrencia, ProprietarioOcorrencia proprietarioOcorrencia, List<Apreensao> apreensoes, List<Anexo> anexos, RelatorioAutoridade relatorioAutoridade, Comarca comarca, Operacao operacao, Boolean liberadoFinalizacao, Long codigoResultadoEncerramento) {
         super();
         this.codigoOcorrenciaBOTC = codigoOcorrenciaBOTC;
         this.tipoOrigemComunicacao = tipoOrigemComunicacao;
         this.dataHoraOcorrencia = dataHoraOcorrencia;
-        this.codigoServico = codigoServico;
         this.numeroOcorrencia = numeroOcorrencia;
         this.cadOcorrencia = cadOcorrencia;
         this.dataInclusaoBOTC = dataInclusaoBOTC;
@@ -104,9 +115,12 @@ public class OcorrenciaPadrao {
         this.origemOcorrencia = origemOcorrencia;
         this.proprietarioOcorrencia = proprietarioOcorrencia;
         this.apreensoes = apreensoes;
+        this.anexos = anexos;
         this.relatorioAutoridade = relatorioAutoridade;
+        this.comarca = comarca;
         this.operacao = operacao;
         this.liberadoFinalizacao = liberadoFinalizacao;
+        this.codigoResultadoEncerramento = codigoResultadoEncerramento;
     }
 
     @JsonProperty("CodigoOcorrenciaBOTC")
@@ -134,19 +148,14 @@ public class OcorrenciaPadrao {
         return dataHoraOcorrencia;
     }
 
+    public Long getDataHoraOcorrenciaAbsoluta() {
+        return dataHoraOcorrenciaAbsoluta;
+    }
+    
     @JsonProperty("DataHoraOcorrencia")
     public void setDataHoraOcorrencia(Date dataHoraOcorrencia) {
         this.dataHoraOcorrencia = dataHoraOcorrencia;
-    }
-
-    @JsonProperty("CodigoServico")
-    public Long getCodigoServico() {
-        return codigoServico;
-    }
-
-    @JsonProperty("CodigoServico")
-    public void setCodigoServico(Long codigoServico) {
-        this.codigoServico = codigoServico;
+        this.dataHoraOcorrenciaAbsoluta = dataHoraOcorrencia.getTime();
     }
 
     @JsonProperty("NumeroOcorrencia")
@@ -176,7 +185,7 @@ public class OcorrenciaPadrao {
 
     @JsonProperty("DataInclusaoBOTC")
     public void setDataInclusaoBOTC(Date dataInclusaoBOTC) {
-        this.dataInclusaoBOTC = dataInclusaoBOTC;
+        this.dataInclusaoBOTC = dataInclusaoBOTC;        
     }
 
     @JsonProperty("Envolvidos")
@@ -230,13 +239,23 @@ public class OcorrenciaPadrao {
     }
 
     @JsonProperty("Apreensoes")
-    public List<Apreenso> getApreensoes() {
+    public List<Apreensao> getApreensoes() {
         return apreensoes;
     }
 
     @JsonProperty("Apreensoes")
-    public void setApreensoes(List<Apreenso> apreensoes) {
+    public void setApreensoes(List<Apreensao> apreensoes) {
         this.apreensoes = apreensoes;
+    }
+
+    @JsonProperty("Anexos")
+    public List<Anexo> getAnexos() {
+        return anexos;
+    }
+
+    @JsonProperty("Anexos")
+    public void setAnexos(List<Anexo> anexos) {
+        this.anexos = anexos;
     }
 
     @JsonProperty("RelatorioAutoridade")
@@ -247,6 +266,16 @@ public class OcorrenciaPadrao {
     @JsonProperty("RelatorioAutoridade")
     public void setRelatorioAutoridade(RelatorioAutoridade relatorioAutoridade) {
         this.relatorioAutoridade = relatorioAutoridade;
+    }
+
+    @JsonProperty("Comarca")
+    public Comarca getComarca() {
+        return comarca;
+    }
+
+    @JsonProperty("Comarca")
+    public void setComarca(Comarca comarca) {
+        this.comarca = comarca;
     }
 
     @JsonProperty("Operacao")
@@ -267,6 +296,16 @@ public class OcorrenciaPadrao {
     @JsonProperty("LiberadoFinalizacao")
     public void setLiberadoFinalizacao(Boolean liberadoFinalizacao) {
         this.liberadoFinalizacao = liberadoFinalizacao;
+    }
+
+    @JsonProperty("CodigoResultadoEncerramento")
+    public Long getCodigoResultadoEncerramento() {
+        return codigoResultadoEncerramento;
+    }
+
+    @JsonProperty("CodigoResultadoEncerramento")
+    public void setCodigoResultadoEncerramento(Long codigoResultadoEncerramento) {
+        this.codigoResultadoEncerramento = codigoResultadoEncerramento;
     }
 
     @Override

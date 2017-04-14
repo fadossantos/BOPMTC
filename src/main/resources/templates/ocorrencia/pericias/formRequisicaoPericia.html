@@ -1,0 +1,213 @@
+<div id="corpo">
+
+	<div id="menuLateral" th:replace="fragments/_menuLateral"></div>
+
+	<div id="corpoPagina" class="row justify-content-around zeroMargPad "
+		style="margin-top: 70px;">
+
+		<div class="container card">
+			<form class="card-block">
+				<div class="row">
+					<div class="col-12">
+						<ul class="nav nav-tabs" role="tablist" id="abasNavegacao">
+							<li class="nav-item"><a class="nav-link active"
+								data-toggle="tab" href="#dadosOcorrencia" role="tab">Dados
+									da Ocorrência</a></li>
+							<li class="nav-item"><a class="nav-link" data-toggle="tab"
+								href="#caracteristicasLocal" role="tab" id="teste1">Características
+									do Local</a></li>
+						</ul>
+						<br />
+					</div>
+				</div>
+
+				<div class="tab-content">
+					<div class="tab-pane active" id="dadosOcorrencia" role="tabpanel">
+
+						<div class="form-group row">
+							<label for="CodNaturezaFinal" class="col-sm-2 col-form-label">Código</label>
+							<div class="col-sm-2">
+								<select class="form-control" id="codNatFim">
+									<option>B04</option>
+								</select>
+							</div>
+							<label for="NaturezaFinal" class="col-sm-2 col-form-label">Natureza
+								Final</label>
+							<div class="col-sm-6">
+								<select class="form-control" id="natFim">
+									<option>ROUBO OUTROS</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="DataHoraFato" class="col-sm-2 col-form-label">Data/Hora
+								Fato</label>
+							<div class="col-sm-10">
+								<input class="form-control" type="datetime-local"
+									value="2011-08-19T13:45:00" id="dataHoraFato" />
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="logradouro" class="col-sm-2 col-form-label">Logradouro</label>
+							<div class="col-sm-6">
+								<input class="form-control" type="text"
+									value="Rua Ribeiro de Lima" id="logradouro" />
+							</div>
+							<label for="Numero" class="col-sm-2 col-form-label">Numero</label>
+							<div class="col-sm-2">
+								<input class="form-control" type="text" value="140" id="Numero" />
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label for="Complemento" class="col-sm-2 col-form-label">Complemento</label>
+							<div class="col-sm-4">
+								<input class="form-control" type="text" value="CPD"
+									id="Complemento" />
+							</div>
+							<label for="Bairro" class="col-sm-2 col-form-label">Bairro</label>
+							<div class="col-sm-4">
+								<input class="form-control" type="text" value="Bom Retiro"
+									id="Bairro" />
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="Ponto de Referência" class="col-sm-2 col-form-label">Ponto
+								de Referência</label>
+							<div class="col-sm-10">
+								<input type="referencia" class="form-control" id="referencia"
+									placeholder="Referencia" />
+							</div>
+						</div>
+						<div class="row justify-content-center">
+							<button class="btn btn-primary" onclick="proximaAba(event)">Continuar</button>
+						</div>
+
+					</div>
+					<div class="tab-pane" id="caracteristicasLocal" role="tabpanel">
+
+						<div class="form-group row">
+							<label for="local" class="col-sm-2 col-form-label">Local</label>
+							<div class="col-sm-10">
+								<select class="form-control" id="local">
+									<option>Via Publica</option>
+								</select>
+							</div>							
+						</div>
+						
+						<div class="form-group row">
+							<label for="local" class="col-sm-2 col-form-label">Complemento Local</label>
+							<div class="col-sm-10">
+								<select class="form-control" id="local">
+									<option>Residencia</option>
+								</select>
+							</div>							
+						</div>
+
+						<div class="row">
+						<fieldset class="form-group col-sm-6">
+						<legend class="col-form-legend col-sm-4">Preservação</legend>
+							<div class="col-sm-8">
+								<div class="form-check">
+									<label class="form-check-label"> <input
+										class="form-check-input" type="radio" name="localPreservado"
+										id="preservado" value="1" checked="true" /> Preservado
+									</label>
+								</div>
+								<div class="form-check">
+									<label class="form-check-label"> <input
+										class="form-check-input" type="radio" name="localPreservado"
+										id="naoPreservado" value="0" /> Não Preservado
+									</label>
+								</div>
+							</div>
+						</fieldset>
+						<fieldset class="form-group col-sm-6">
+							<legend class="col-form-legend col-sm-4">Ambiente</legend>
+							<div class="col-sm-8">
+								<div class="form-check">
+									<label class="form-check-label"> <input
+										class="form-check-input" type="radio" name="localAmbiente"
+										id="interno" value="1" checked="true" /> Interno
+									</label>
+								</div>
+								<div class="form-check">
+									<label class="form-check-label"> <input
+										class="form-check-input" type="radio" name="LocalAmbeinte"
+										id="externo" value="0" /> Externo
+									</label>
+								</div>								
+							</div>
+						</fieldset>
+						</div>
+						
+						
+						<div class="row">
+						<fieldset class="form-group col-sm-6">
+						<legend class="col-form-legend col-sm-2">Iluminação</legend>
+							<div class="col-sm-10">
+								<div class="form-check">
+									<label class="form-check-label"> <input
+										class="form-check-input" type="radio" name="iluminacao"
+										id="iluminacao" value="1" checked="true" /> Luz Solar
+									</label>
+								</div>
+								<div class="form-check">
+									<label class="form-check-label"> <input
+										class="form-check-input" type="radio" name="iluminacao"
+										id="iluminacao" value="1" checked="true" /> Luz Artificial
+									</label>
+								</div>
+								<div class="form-check">
+									<label class="form-check-label"> <input
+										class="form-check-input" type="radio" name="iluminacao"
+										id="iluminacao" value="1" checked="true" /> Luz Lua
+									</label>
+								</div>
+								
+							</div>
+						</fieldset>
+						<fieldset class="form-group col-sm-6">
+							<legend class="col-form-legend col-sm-2">Tempo</legend>
+							<div class="col-sm-10">
+								<div class="form-check">
+									<label class="form-check-label"> <input
+										class="form-check-input" type="radio" name="localAmbiente"
+										id="interno" value="1" checked="true" /> Sol
+									</label>
+								</div>
+								<div class="form-check">
+									<label class="form-check-label"> <input
+										class="form-check-input" type="radio" name="LocalAmbeinte"
+										id="externo" value="0" /> Chuva
+									</label>
+								</div>
+								<div class="form-check">
+									<label class="form-check-label"> <input
+										class="form-check-input" type="radio" name="localAmbiente"
+										id="interno" value="1" checked="true" /> Nublado
+									</label>
+								</div>																
+							</div>
+						</fieldset>
+						</div>
+
+						
+						
+						
+						<div class="row justify-content-center">							
+								<button type="submit" class="btn btn-primary">Salvar</button>							
+						</div>
+
+
+					</div>
+
+				</div>
+
+
+
+
+			</form>
+		</div>
+	</div>
+</div>

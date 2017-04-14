@@ -1,0 +1,219 @@
+<div id="corpo">
+
+	<div id="menuLateral" th:replace="fragments/_menuLateral"></div>
+
+	<div id="corpoPagina" class="row justify-content-around zeroMargPad "
+		style="margin-top: 70px;">
+
+		<div class="container card">
+			<form class="card-block" role="form" th:action="@{/dadosOcorrencia}"
+				th:object="${detalheOcorrencia}" method="post">
+				<div class="row" th:if="${#fields.hasErrors('*')}">
+					<div class="col-lg-12">
+						<ul class="errorlist">
+							<li th:each="err : ${#fields.errors('*')}" th:text="${err}">Dados
+								Incorretos</li>
+						</ul>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12">
+						<ul class="nav nav-tabs" role="tablist" id="abasNavegacao">
+							<li class="nav-item"><a class="nav-link active"
+								data-toggle="tab" href="#dadosOcorrencia" role="tab">Dados
+									da Ocorrência</a></li>
+							<li class="nav-item"><a class="nav-link" data-toggle="tab"
+								href="#caracteristicasLocal" role="tab" id="teste1">Características
+									do Local</a></li>
+						</ul>
+						<br />
+					</div>
+				</div>
+
+				<div class="tab-content">
+					<div class="tab-pane active" id="dadosOcorrencia" role="tabpanel">
+
+						<div class="form-group row">
+							<label for="CodNaturezaFinal" class="col-sm-2 col-form-label">Código</label>
+							<div class="col-sm-2">
+								<select class="form-control"
+									th:onChange="'executaAjaxGet(\'/dadosOcorrencia/listaNCDPorNatCod/\' + $(this).val()   , \'listaNCD\', \'\', \'\');'">
+									<option th:each="
+									natCod
+									: ${listaNatCod}"
+										th:value="${natCod}" th:text="${natCod}"
+										th:selected="${natCod} == ${detalheOcorrencia.ncdFinalObj.natCod}">NatCod
+									</option>
+								</select>
+							</div>
+							<label for="NaturezaFinal" class="col-sm-2 col-form-label">Natureza
+								Final</label>
+
+							<div class="col-sm-6" id="listaNCD">
+								<select class="form-control" th:field="*{ncdFinal}">
+									<option th:each="ncd : ${listaNCD}" th:value="${ncd.ncdCod}"
+										th:text="${ncd.natDes} + ' - ' + ${ncd.natCplDes} + ' - ' + ${ncd.dtlCplDes}"
+										th:selected="${ncd.ncdCod} == ${detalheOcorrencia.ncdFinalObj.ncdCod}">Natureza</option>
+								</select>
+							</div>
+
+						</div>
+						<div class="form-group row">
+							<label for="DataHoraFato" class="col-sm-2 col-form-label">Data/Hora
+								Fato</label>
+							<div class="col-sm-10">
+								<input class="form-control usaCalendario" type="text"
+									th:field="*{dataHoraFato}" />
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="logradouro" class="col-sm-2 col-form-label">Logradouro</label>
+							<div class="col-sm-6">
+								<input class="form-control" type="text"
+									th:field="*{logradouro.endereco}" />
+							</div>
+							<label for="Numero" class="col-sm-2 col-form-label">Numero</label>
+							<div class="col-sm-2">
+								<input class="form-control" type="text"
+									th:field="*{logradouro.numero}" />
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label for="Complemento" class="col-sm-2 col-form-label">Complemento</label>
+							<div class="col-sm-4">
+								<input class="form-control" type="text"
+									th:field="*{logradouro.complemento}" />
+							</div>
+							<label for="Bairro" class="col-sm-2 col-form-label">Bairro</label>
+							<div class="col-sm-4">
+								<input class="form-control"
+									th:field="*{logradouro.bairro.descricao}" />
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="Ponto de Referência" class="col-sm-2 col-form-label">Ponto
+								de Referência</label>
+							<div class="col-sm-10">
+								<input type="referencia" class="form-control"
+									th:field="*{logradouro.pontoReferencia}" />
+							</div>
+						</div>
+						<div class="row justify-content-center">
+							<button class="btn btn-primary" onclick="proximaAba(event)">Continuar</button>
+						</div>
+
+					</div>
+					<div class="tab-pane" id="caracteristicasLocal" role="tabpanel">
+
+						<div class="form-group row">
+							<label for="local" class="col-sm-2 col-form-label">Local</label>
+							<div class="col-sm-10">
+								<select class="form-control" th:field="*{codigoLocal}">
+									<option th:each="local : ${listaLocais}"
+										th:value="${local.codigo}" th:text="${local.descricao}">Local</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label for="local" class="col-sm-2 col-form-label">Complemento
+								Local</label>
+							<div class="col-sm-10">
+								<select class="form-control"
+									th:field="*{codigoLocalComplemento}">
+									<option th:each="complementolocal : ${listaComplementoLocais}"
+										th:value="${complementolocal.codigo}"
+										th:text="${complementolocal.descricao}">Local</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="row">
+							<fieldset class="form-group col-sm-6">
+								<legend class="col-form-legend col-sm-4">Preservação</legend>
+								<div class="col-sm-8">
+									<div class="form-check">
+										<label class="form-check-label"> <input
+											class="form-check-input" type="radio"
+											th:field="*{localPreservado}" value="true" /> Preservado
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label"> <input
+											class="form-check-input" type="radio"
+											th:field="*{localPreservado}" value="false" /> Não
+											Preservado
+										</label>
+									</div>
+								</div>
+							</fieldset>
+							<fieldset class="form-group col-sm-6">
+								<legend class="col-form-legend col-sm-4">Ambiente</legend>
+								<div class="col-sm-8">
+									<div class="form-check">
+										<label class="form-check-label"> <input
+											class="form-check-input" type="radio"
+											th:field="*{localAmbiente}" value="Interno" /> Interno
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label"> <input
+											class="form-check-input" type="radio"
+											th:field="*{localAmbiente}" value="Externo" /> Externo
+										</label>
+									</div>
+								</div>
+							</fieldset>
+						</div>
+
+
+						<div class="row">
+							<fieldset class="form-group col-sm-6">
+								<legend class="col-form-legend col-sm-2">Iluminação</legend>
+								<div class="col-sm-10">
+
+									<div class="form-check" th:each="obj : ${listaIluminacao}">
+										<label class="form-check-label"> <input
+											class="form-check-input" type="radio"
+											th:field="*{codigoIluminacao}" th:value="${obj.codigo}" /> <span
+											th:for="${#ids.prev('codigoIluminacao')}"
+											th:text="${obj.descricao}">iluminacao</span></label>
+									</div>
+
+
+								</div>
+							</fieldset>
+							<fieldset class="form-group col-sm-6">
+								<legend class="col-form-legend col-sm-2">Tempo</legend>
+								<div class="col-sm-10">
+									<div class="form-check" th:each="obj : ${listaCondicoesTempo}">
+										<label class="form-check-label"> <input
+											class="form-check-input" type="radio"
+											th:field="*{codigoTempo}" th:value="${obj.codigo}" /> <span
+											th:for="${#ids.prev('codigoTempo')}"
+											th:text="${obj.descricao}">iluminacao</span></label>
+									</div>
+								</div>
+							</fieldset>
+						</div>
+
+
+
+
+						<div class="row justify-content-center">
+							<button type="submit" class="btn btn-primary">Salvar</button>
+						</div>
+
+
+					</div>
+
+				</div>
+
+
+
+
+			</form>
+		</div>
+	</div>
+</div>

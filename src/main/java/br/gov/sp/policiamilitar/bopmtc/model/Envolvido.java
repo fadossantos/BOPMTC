@@ -12,8 +12,9 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 @JsonPropertyOrder({
     "CodigoSequencial",
     "NumeroPessoaSIOPM",
-    "CodigoSituacao",
+    "SituacaoOcorrencia",
     "Nome",
+    "NomeSocial",
     "RG",
     "UFRG",
     "CPF",
@@ -32,7 +33,12 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
     "VersaoEnvolvido",
     "RecusaAssinatura",
     "Analfabeta",
-    "Proprietario"
+    "Proprietario",
+    "CodigoGenero",
+    "CodigoGrauInstrucao",
+    "TermoCompromisso",
+    "ManifestoOfendido",
+    "CodigoTipoDeficiencia"
 })
 public class Envolvido {
 
@@ -40,10 +46,12 @@ public class Envolvido {
     private Long codigoSequencial;
     @JsonProperty("NumeroPessoaSIOPM")
     private Long numeroPessoaSIOPM;
-    @JsonProperty("CodigoSituacao")
-    private String codigoSituacao;
+    @JsonProperty("SituacaoOcorrencia")
+    private SituacaoOcorrencia situacaoOcorrencia;
     @JsonProperty("Nome")
     private String nome;
+    @JsonProperty("NomeSocial")
+    private String nomeSocial;
     @JsonProperty("RG")
     private String rG;
     @JsonProperty("UFRG")
@@ -82,6 +90,16 @@ public class Envolvido {
     private Boolean analfabeta;
     @JsonProperty("Proprietario")
     private Boolean proprietario;
+    @JsonProperty("CodigoGenero")
+    private String codigoGenero;
+    @JsonProperty("CodigoGrauInstrucao")
+    private CodigoGrauInstrucao codigoGrauInstrucao;
+    @JsonProperty("TermoCompromisso")
+    private Boolean termoCompromisso;
+    @JsonProperty("ManifestoOfendido")
+    private Boolean manifestoOfendido;
+    @JsonProperty("CodigoTipoDeficiencia")
+    private CodigoTipoDeficiencia codigoTipoDeficiencia;
 
     /**
      * No args constructor for use in serialization
@@ -93,35 +111,42 @@ public class Envolvido {
     /**
      * 
      * @param proprietario
-     * @param recusaAssinatura
-     * @param contato
      * @param nacionalidade
-     * @param versaoEnvolvido
-     * @param codigoSituacao
-     * @param estadoCivil
      * @param codigoSequencial
+     * @param estadoCivil
      * @param naturalidade
-     * @param rG
      * @param sexo
-     * @param pai
-     * @param cPF
-     * @param cutis
+     * @param codigoGrauInstrucao
+     * @param situacaoOcorrencia
      * @param cnh
      * @param mae
      * @param numeroPessoaSIOPM
      * @param uFNaturalidade
-     * @param uFRG
-     * @param profissao
+     * @param codigoTipoDeficiencia
      * @param dataNascimento
+     * @param profissao
+     * @param codigoGenero
+     * @param recusaAssinatura
+     * @param contato
+     * @param nomeSocial
+     * @param versaoEnvolvido
+     * @param manifestoOfendido
+     * @param rG
+     * @param pai
+     * @param cPF
+     * @param cutis
+     * @param termoCompromisso
+     * @param uFRG
      * @param nome
      * @param analfabeta
      */
-    public Envolvido(Long codigoSequencial, Long numeroPessoaSIOPM, String codigoSituacao, String nome, String rG, UFRG uFRG, Long cPF, String pai, String mae, String nacionalidade, String naturalidade, UFNaturalidade uFNaturalidade, String sexo, String dataNascimento, Cutis cutis, Cnh cnh, Long estadoCivil, Profissao profissao, List<Contato> contato, String versaoEnvolvido, Boolean recusaAssinatura, Boolean analfabeta, Boolean proprietario) {
+    public Envolvido(Long codigoSequencial, Long numeroPessoaSIOPM, SituacaoOcorrencia situacaoOcorrencia, String nome, String nomeSocial, String rG, UFRG uFRG, Long cPF, String pai, String mae, String nacionalidade, String naturalidade, UFNaturalidade uFNaturalidade, String sexo, String dataNascimento, Cutis cutis, Cnh cnh, Long estadoCivil, Profissao profissao, List<Contato> contato, String versaoEnvolvido, Boolean recusaAssinatura, Boolean analfabeta, Boolean proprietario, String codigoGenero, CodigoGrauInstrucao codigoGrauInstrucao, Boolean termoCompromisso, Boolean manifestoOfendido, CodigoTipoDeficiencia codigoTipoDeficiencia) {
         super();
         this.codigoSequencial = codigoSequencial;
         this.numeroPessoaSIOPM = numeroPessoaSIOPM;
-        this.codigoSituacao = codigoSituacao;
+        this.situacaoOcorrencia = situacaoOcorrencia;
         this.nome = nome;
+        this.nomeSocial = nomeSocial;
         this.rG = rG;
         this.uFRG = uFRG;
         this.cPF = cPF;
@@ -141,6 +166,11 @@ public class Envolvido {
         this.recusaAssinatura = recusaAssinatura;
         this.analfabeta = analfabeta;
         this.proprietario = proprietario;
+        this.codigoGenero = codigoGenero;
+        this.codigoGrauInstrucao = codigoGrauInstrucao;
+        this.termoCompromisso = termoCompromisso;
+        this.manifestoOfendido = manifestoOfendido;
+        this.codigoTipoDeficiencia = codigoTipoDeficiencia;
     }
 
     @JsonProperty("CodigoSequencial")
@@ -163,14 +193,14 @@ public class Envolvido {
         this.numeroPessoaSIOPM = numeroPessoaSIOPM;
     }
 
-    @JsonProperty("CodigoSituacao")
-    public String getCodigoSituacao() {
-        return codigoSituacao;
+    @JsonProperty("SituacaoOcorrencia")
+    public SituacaoOcorrencia getSituacaoOcorrencia() {
+        return situacaoOcorrencia;
     }
 
-    @JsonProperty("CodigoSituacao")
-    public void setCodigoSituacao(String codigoSituacao) {
-        this.codigoSituacao = codigoSituacao;
+    @JsonProperty("SituacaoOcorrencia")
+    public void setSituacaoOcorrencia(SituacaoOcorrencia situacaoOcorrencia) {
+        this.situacaoOcorrencia = situacaoOcorrencia;
     }
 
     @JsonProperty("Nome")
@@ -181,6 +211,16 @@ public class Envolvido {
     @JsonProperty("Nome")
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    @JsonProperty("NomeSocial")
+    public String getNomeSocial() {
+        return nomeSocial;
+    }
+
+    @JsonProperty("NomeSocial")
+    public void setNomeSocial(String nomeSocial) {
+        this.nomeSocial = nomeSocial;
     }
 
     @JsonProperty("RG")
@@ -371,6 +411,56 @@ public class Envolvido {
     @JsonProperty("Proprietario")
     public void setProprietario(Boolean proprietario) {
         this.proprietario = proprietario;
+    }
+
+    @JsonProperty("CodigoGenero")
+    public String getCodigoGenero() {
+        return codigoGenero;
+    }
+
+    @JsonProperty("CodigoGenero")
+    public void setCodigoGenero(String codigoGenero) {
+        this.codigoGenero = codigoGenero;
+    }
+
+    @JsonProperty("CodigoGrauInstrucao")
+    public CodigoGrauInstrucao getCodigoGrauInstrucao() {
+        return codigoGrauInstrucao;
+    }
+
+    @JsonProperty("CodigoGrauInstrucao")
+    public void setCodigoGrauInstrucao(CodigoGrauInstrucao codigoGrauInstrucao) {
+        this.codigoGrauInstrucao = codigoGrauInstrucao;
+    }
+
+    @JsonProperty("TermoCompromisso")
+    public Boolean getTermoCompromisso() {
+        return termoCompromisso;
+    }
+
+    @JsonProperty("TermoCompromisso")
+    public void setTermoCompromisso(Boolean termoCompromisso) {
+        this.termoCompromisso = termoCompromisso;
+    }
+
+    @JsonProperty("ManifestoOfendido")
+    public Boolean getManifestoOfendido() {
+        return manifestoOfendido;
+    }
+
+    @JsonProperty("ManifestoOfendido")
+    public void setManifestoOfendido(Boolean manifestoOfendido) {
+        this.manifestoOfendido = manifestoOfendido;
+    }
+
+    @JsonProperty("CodigoTipoDeficiencia")
+    public CodigoTipoDeficiencia getCodigoTipoDeficiencia() {
+        return codigoTipoDeficiencia;
+    }
+
+    @JsonProperty("CodigoTipoDeficiencia")
+    public void setCodigoTipoDeficiencia(CodigoTipoDeficiencia codigoTipoDeficiencia) {
+        this.codigoTipoDeficiencia = codigoTipoDeficiencia;
     }
 
     @Override

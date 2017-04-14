@@ -10,10 +10,10 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 @JsonPropertyOrder({
     "NumeroArmaSIOPM",
     "Calibre",
-    "CodigoAcabamento",
+    "Acabamento",
     "NumeroSerie",
-    "CodigoMarca",
-    "CodigoTipo",
+    "Marca",
+    "Tipo",
     "NumeroRaspado",
     "NumeroRegistro"
 })
@@ -22,15 +22,15 @@ public class Arma {
     @JsonProperty("NumeroArmaSIOPM")
     private Long numeroArmaSIOPM;
     @JsonProperty("Calibre")
-    private String calibre;
-    @JsonProperty("CodigoAcabamento")
-    private Long codigoAcabamento;
+    private CalibreArma calibre;
+    @JsonProperty("Acabamento")
+    private AcabamentoArma acabamento;
     @JsonProperty("NumeroSerie")
     private String numeroSerie;
-    @JsonProperty("CodigoMarca")
-    private Long codigoMarca;
-    @JsonProperty("CodigoTipo")
-    private Long codigoTipo;
+    @JsonProperty("Marca")
+    private MarcaArma marca;
+    @JsonProperty("Tipo")
+    private TipoArma tipo;
     @JsonProperty("NumeroRaspado")
     private Boolean numeroRaspado;
     @JsonProperty("NumeroRegistro")
@@ -45,23 +45,23 @@ public class Arma {
 
     /**
      * 
-     * @param codigoTipo
      * @param numeroRaspado
-     * @param codigoMarca
-     * @param codigoAcabamento
+     * @param acabamento
      * @param numeroRegistro
+     * @param tipo
+     * @param marca
      * @param numeroSerie
      * @param numeroArmaSIOPM
      * @param calibre
      */
-    public Arma(Long numeroArmaSIOPM, String calibre, Long codigoAcabamento, String numeroSerie, Long codigoMarca, Long codigoTipo, Boolean numeroRaspado, String numeroRegistro) {
+    public Arma(Long numeroArmaSIOPM, CalibreArma calibre, AcabamentoArma acabamento, String numeroSerie, MarcaArma marca, TipoArma tipo, Boolean numeroRaspado, String numeroRegistro) {
         super();
         this.numeroArmaSIOPM = numeroArmaSIOPM;
         this.calibre = calibre;
-        this.codigoAcabamento = codigoAcabamento;
+        this.acabamento = acabamento;
         this.numeroSerie = numeroSerie;
-        this.codigoMarca = codigoMarca;
-        this.codigoTipo = codigoTipo;
+        this.marca = marca;
+        this.tipo = tipo;
         this.numeroRaspado = numeroRaspado;
         this.numeroRegistro = numeroRegistro;
     }
@@ -77,23 +77,23 @@ public class Arma {
     }
 
     @JsonProperty("Calibre")
-    public String getCalibre() {
+    public CalibreArma getCalibre() {
         return calibre;
     }
 
     @JsonProperty("Calibre")
-    public void setCalibre(String calibre) {
+    public void setCalibre(CalibreArma calibre) {
         this.calibre = calibre;
     }
 
-    @JsonProperty("CodigoAcabamento")
-    public Long getCodigoAcabamento() {
-        return codigoAcabamento;
+    @JsonProperty("Acabamento")
+    public AcabamentoArma getAcabamento() {
+        return acabamento;
     }
 
-    @JsonProperty("CodigoAcabamento")
-    public void setCodigoAcabamento(Long codigoAcabamento) {
-        this.codigoAcabamento = codigoAcabamento;
+    @JsonProperty("Acabamento")
+    public void setAcabamento(AcabamentoArma acabamento) {
+        this.acabamento = acabamento;
     }
 
     @JsonProperty("NumeroSerie")
@@ -106,24 +106,24 @@ public class Arma {
         this.numeroSerie = numeroSerie;
     }
 
-    @JsonProperty("CodigoMarca")
-    public Long getCodigoMarca() {
-        return codigoMarca;
+    @JsonProperty("Marca")
+    public MarcaArma getMarca() {
+        return marca;
     }
 
-    @JsonProperty("CodigoMarca")
-    public void setCodigoMarca(Long codigoMarca) {
-        this.codigoMarca = codigoMarca;
+    @JsonProperty("Marca")
+    public void setMarca(MarcaArma marca) {
+        this.marca = marca;
     }
 
-    @JsonProperty("CodigoTipo")
-    public Long getCodigoTipo() {
-        return codigoTipo;
+    @JsonProperty("Tipo")
+    public TipoArma getTipo() {
+        return tipo;
     }
 
-    @JsonProperty("CodigoTipo")
-    public void setCodigoTipo(Long codigoTipo) {
-        this.codigoTipo = codigoTipo;
+    @JsonProperty("Tipo")
+    public void setTipo(TipoArma tipo) {
+        this.tipo = tipo;
     }
 
     @JsonProperty("NumeroRaspado")

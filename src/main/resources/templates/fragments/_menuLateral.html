@@ -2,72 +2,77 @@
 <div id="menuLateral" class="sidenav">
 	<div class="container-fluid">
 		<ul class="nav flex-column">
+				<li class="nav-item"><button class="btn btn-secondary"
+					style="height: 60px; width: 100%;" type="button">
+					<table width="100%">
+						<tr>
+							<th rowspan="2" width="20%"><img
+								th:src="'data:image/jpeg;base64,' + ${dadosPM.foto}"
+								alt="HTML5 Icon" width="40" height="40"
+								th:class="rounded-circle" /></th>
+							<td align="center"><span
+								th:text="'  ' + ${dadosPM.posto.sigla}">posto</span></td>
+						</tr>
+						<tr>
+							<td align="center"><span
+								th:text="'  ' + ${dadosPM.nomeGuerra}">nome</span></td>
+						</tr>
+
+					</table>
+				</button></li>
+			<div class="dropdown-divider"></div>
+			<li class="nav-item"><button class="btn btn-secondary"
+					style="height: 60px; width: 100%;" type="button"
+					onclick="executaAjaxGet('/dadosOcorrencia', 'corpo', '', '')">
+					<table width="100%">
+						<tr>
+							<th width="20%"><i class="fa fa-pencil-square-o" /></th>
+							<td align="left"><span>Dados da Ocorrência</span></td>
+						</tr>
+					</table>
+				</button></li>
+			<div class="dropdown-divider"></div>
 			<li class="nav-item"><button class="btn btn-secondary"
 					style="height: 60px; width: 100%;" type="button">
-					<table>
+					<table  width="100%">
 						<tr>
-							<th rowspan="2"><img
-								th:src="'data:image/jpeg;base64,' + ${dadosPM.foto}"
-								alt="HTML5 Icon" width="30" height="30"
-								th:class="rounded-circle" /></th>
-							<td><span th:text="'  ' + ${dadosPM.posto.sigla}">posto</span></td>
-						</tr>
-						<tr>
-							<td><span th:text="'  ' + ${dadosPM.nomeGuerra}">nome</span></td>
+							<th width="20%"><i class="fa fa-users" /></th>
+							<td align="left"><span>Envolvidos</span></td>
 						</tr>
 					</table>
 				</button></li>
-				<div class="dropdown-divider"></div>
-				<li class="nav-item"><button class="btn btn-secondary"
+			<div class="dropdown-divider"></div>
+			<li class="nav-item"><button class="btn btn-secondary"
 					style="height: 60px; width: 100%;" type="button">
-					<table>
+					<table  width="100%" >
 						<tr>
-							<th><i class="fa fa-pencil-square-o"/></th>
-							<td><span th:text="'  ' + ${dadosPM.posto.sigla}">Dados da Ocorrência</span></td>
-						</tr>						
+							<th width="20%"><i class="fa fa-car" /></th>
+							<td align="left"><span>Veículos</span></td>
+						</tr>
 					</table>
 				</button></li>
-				<div class="dropdown-divider"></div>
-				<li class="nav-item"><button class="btn btn-secondary"
+			<div class="dropdown-divider"></div>
+			<li class="nav-item"><button class="btn btn-secondary"
 					style="height: 60px; width: 100%;" type="button">
-					<table>
+					<table  width="100%"  >
 						<tr>
-							<th><i class="fa fa-users"/></th>
-							<td><span th:text="'  ' + ${dadosPM.posto.sigla}">Envolvidos</span></td>
-						</tr>						
+							<th width="20%"><i class="fa fa-inbox" /></th>
+							<td align="left"><span>Apreensões</span></td>
+						</tr>
 					</table>
 				</button></li>
-				<div class="dropdown-divider"></div>
-				<li class="nav-item"><button class="btn btn-secondary"
-					style="height: 60px; width: 100%;" type="button">
-					<table>
+			<div class="dropdown-divider"></div>
+			<li class="nav-item"><a
+				class="btn btn-secondary align-items-center"
+				style="height: 60px; width: 100%;" href="/logout">
+					<table width="100%" align="left" class="centralizado">
 						<tr>
-							<th><i class="fa fa-car"/></th>
-							<td><span th:text="'  ' + ${dadosPM.posto.sigla}">Veículos</span></td>
-						</tr>						
+							<th width="20%"><i class="fa fa-power-off" /></th>
+							<td align="left"><span>Sair</span></td>
+						</tr>
 					</table>
-				</button></li>
-				<div class="dropdown-divider"></div>
-				<li class="nav-item"><button class="btn btn-secondary"
-					style="height: 60px; width: 100%;" type="button">
-					<table>
-						<tr>
-							<th><i class="fa fa-inbox"/></th>
-							<td><span th:text="'  ' + ${dadosPM.posto.sigla}">Apreensões</span></td>
-						</tr>						
-					</table>
-				</button></li>
-				<div class="dropdown-divider"></div>
-				<li class="nav-item"><button class="btn btn-secondary"
-					style="height: 60px; width: 100%;" type="button">
-					<table>
-						<tr>
-							<th><i class="fa fa-power-off "/></th>
-							<td><span th:text="'  ' + ${dadosPM.posto.sigla}">Sair</span></td>
-						</tr>						
-					</table>
-				</button></li>
-				<div class="dropdown-divider"></div>
+			</a></li>
+			<div class="dropdown-divider"></div>
 
 		</ul>
 	</div>

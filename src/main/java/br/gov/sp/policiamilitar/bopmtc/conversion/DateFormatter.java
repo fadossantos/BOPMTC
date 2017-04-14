@@ -42,20 +42,22 @@ public class DateFormatter implements Formatter<Date> {
 
     public Date parse(final String text, final Locale locale) throws ParseException {
         final SimpleDateFormat dateFormat = createDateFormat(locale);
-        return dateFormat.parse(text);
+    	return dateFormat.parse(text);
     }
 
     public String print(final Date object, final Locale locale) {
         final SimpleDateFormat dateFormat = createDateFormat(locale);
-        return dateFormat.format(object);
+    	return dateFormat.format(object);
     }
 
     private SimpleDateFormat createDateFormat(final Locale locale) {
-        final String format = this.messageSource.getMessage("date.format", null, locale);
+        final String format = "dd/MM/yyyy' 'HH:mm";
+
         final SimpleDateFormat dateFormat = new SimpleDateFormat(format);
         dateFormat.setLenient(false);
-        dateFormat.setTimeZone(TimeZone.getTimeZone("America/Sao_Paulo"));
-        return dateFormat;
+       //dateFormat.setTimeZone(TimeZone.getTimeZone("America/Sao_Paulo"));
+        dateFormat.setTimeZone(TimeZone.getTimeZone("Universal"));
+       return dateFormat;
     }
  
 }

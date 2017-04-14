@@ -1,0 +1,36 @@
+<div id="menuLateral" class="sidenav">
+	<div class="container-fluid">
+		<ul class="nav flex-column">
+			<li class="nav-item"><button class="btn btn-secondary"
+					style="height: 60px; width: 100%;" type="button">
+					<table width="100%">
+						<tr>
+							<th rowspan="2"><img
+								th:src="'data:image/jpeg;base64,' + ${dadosPM.foto}"
+								alt="HTML5 Icon" width="40" height="40"
+								th:class="rounded-circle" /></th>
+							<td align="left"><span
+								th:text="'  ' + ${dadosPM.posto.sigla}">posto</span></td>
+						</tr>
+						<tr>
+							<td align="left"><span
+								th:text="'  ' + ${dadosPM.nomeGuerra}">nome</span></td>
+						</tr>
+
+					</table>
+				</button></li>
+			<div class="dropdown-divider"></div>
+			<li class="nav-item"><a
+				class="btn btn-secondary align-items-center"
+				style="height: 60px; width: 100%;" href="/logout">
+					<table width="100%" align="center" class="centralizado">
+						<tr>
+							<th><i class="fa fa-power-off" /></th>
+							<td align="left"><span>Sair</span></td>
+						</tr>
+					</table>
+			</a></li>
+			<div class="dropdown-divider"></div>
+		</ul>
+	</div>
+</div>

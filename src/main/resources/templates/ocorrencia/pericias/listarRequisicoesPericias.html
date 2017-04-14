@@ -1,0 +1,27 @@
+<div id="corpo">
+
+	<div id="menuLateral" th:replace="fragments/_menuLateral"></div>
+
+	<div id="corpoPagina">
+		<div class="row justify-content-around zeroMargPad "
+			style="margin-top: 70px;">
+
+			<div
+				class="card col-11 col-sm-8 col-md-5 col-lg-5 col-xl-5 zeroMargPad"
+				th:each="envolvido : ${ocorrencia.envolvidos}"
+				style="margin-bottom: 10px; margin-left: 10px; margin-right: 10px;"
+				th:onclick="'executaAjaxGet(\'/envolvido/obter/' + ${envolvido.codigoSequencial} + '\',\'corpoPagina\',\'\',\'\')'">
+				<div class="card-block">
+					<h5 class="card-text" th:text="${envolvido.nome}">Nome</h5>
+					<h5 class="card-text" th:text="${envolvido.rG}">Nat inicial</h5>
+				</div>
+			</div>
+			<div class="row">
+				<a
+					th:onclick="'executaAjaxGet(\'/envolvido/pesquisarEnvolvido\',\'corpo\',\'\',\'\')'">Adicionar
+					Envolvido</a>
+			</div>
+		</div>
+
+	</div>
+</div>

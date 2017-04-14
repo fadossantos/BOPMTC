@@ -13,7 +13,8 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
     "CpfPatrulheiro",
     "NumeroUnidadeServico",
     "CadPatrulha",
-    "EncarregadoOcorrencia"
+    "EncarregadoOcorrencia",
+    "CodigoServico"
 })
 public class ProprietarioOcorrencia {
 
@@ -29,6 +30,8 @@ public class ProprietarioOcorrencia {
     private Long cadPatrulha;
     @JsonProperty("EncarregadoOcorrencia")
     private EncarregadoOcorrencia encarregadoOcorrencia;
+    @JsonProperty("CodigoServico")
+    private Long codigoServico;
 
     /**
      * No args constructor for use in serialization
@@ -39,6 +42,7 @@ public class ProprietarioOcorrencia {
 
     /**
      * 
+     * @param codigoServico
      * @param cadPatrulha
      * @param numeroUnidadeServico
      * @param encarregadoOcorrencia
@@ -46,7 +50,7 @@ public class ProprietarioOcorrencia {
      * @param cpfPatrulheiro
      * @param imeiDispositivo
      */
-    public ProprietarioOcorrencia(String imeiDispositivo, String nomePatrulheiro, Long cpfPatrulheiro, String numeroUnidadeServico, Long cadPatrulha, EncarregadoOcorrencia encarregadoOcorrencia) {
+    public ProprietarioOcorrencia(String imeiDispositivo, String nomePatrulheiro, Long cpfPatrulheiro, String numeroUnidadeServico, Long cadPatrulha, EncarregadoOcorrencia encarregadoOcorrencia, Long codigoServico) {
         super();
         this.imeiDispositivo = imeiDispositivo;
         this.nomePatrulheiro = nomePatrulheiro;
@@ -54,6 +58,7 @@ public class ProprietarioOcorrencia {
         this.numeroUnidadeServico = numeroUnidadeServico;
         this.cadPatrulha = cadPatrulha;
         this.encarregadoOcorrencia = encarregadoOcorrencia;
+        this.codigoServico = codigoServico;
     }
 
     @JsonProperty("ImeiDispositivo")
@@ -114,6 +119,16 @@ public class ProprietarioOcorrencia {
     @JsonProperty("EncarregadoOcorrencia")
     public void setEncarregadoOcorrencia(EncarregadoOcorrencia encarregadoOcorrencia) {
         this.encarregadoOcorrencia = encarregadoOcorrencia;
+    }
+
+    @JsonProperty("CodigoServico")
+    public Long getCodigoServico() {
+        return codigoServico;
+    }
+
+    @JsonProperty("CodigoServico")
+    public void setCodigoServico(Long codigoServico) {
+        this.codigoServico = codigoServico;
     }
 
     @Override

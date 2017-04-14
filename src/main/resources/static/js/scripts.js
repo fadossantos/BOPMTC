@@ -5,9 +5,7 @@ function executaAjaxGet(urlChamada, divDestino, preExecute, posExecute) {
 		beforeSend : preExecute,
 
 		success : function(response) {
-			// we have the response
-			//var x = document.getElementById(divDestino);
-			//x.innerHTML = response;
+
 			$('#' + divDestino).replaceWith(response);
 		},
 		complete : function() {
@@ -21,7 +19,6 @@ function executaAjaxGet(urlChamada, divDestino, preExecute, posExecute) {
 
 }
 
-
 function afterReload() {
 	$('.multipleSelect').multiselect({
 		maxHeight : 200,
@@ -34,13 +31,13 @@ function afterReload() {
 		selectAllText : "Todos"
 
 	});
-	$('.usaCalendario').datetimepicker({
-		format : 'd/m/Y H:i:s'
-	});
 	$.datetimepicker.setLocale('pt-BR');
-	$('table#sample').DataTable().ajax.reload();
-}
+	$('.usaCalendario').datetimepicker({
+		format : 'd/m/Y H:i'
+	});
+	
 
+}
 
 function ajaxindicatorstart(text) {
 	$('#resultLoading').css({
@@ -102,9 +99,31 @@ $(document).on({
 
 function navClick() {
 	if (document.getElementById("menuLateral").style.width == "250px")
-    document.getElementById("menuLateral").style.width = "0px";
-    else 
-    document.getElementById("menuLateral").style.width = "250px";
-    
+		document.getElementById("menuLateral").style.width = "0px";
+	else
+		document.getElementById("menuLateral").style.width = "250px";
+
 }
 
+$(document).ready(function() {
+	$('body').on("swipeleft", function() {
+		document.getElementById("menuLateral").style.width = "0px";
+	});
+	$('body').on("swiperight", function() {
+		document.getElementById("menuLateral").style.width = "250px";
+	});
+
+	console.log("document loaded");
+});
+
+function proximaAba(event) {
+	$('#abasNavegacao li a.active').parent().next('li').find('a').trigger(
+			"click");
+	event.preventDefault();
+
+}
+
+function abaAnterior() {
+	$('#abasNavegacao li a.active').parent().prev('li').find('a').trigger(
+			"click");
+}

@@ -38,13 +38,10 @@ public class HomeController {
 	@GetMapping("")
 	public ModelAndView home(HttpSession session){
 		PoliciaisMilitares policiaisMilitares = this.policialMilitarService.obterPolicialLogado(session, SecurityContextHolder.getContext().getAuthentication().getName());
-		session.setAttribute("policiaisMilitares", policiaisMilitares);
-		String codPtr = policiaisMilitares.getUnidadeServico().getIdentificador();
-		String cadPatrulha = String.valueOf(policiaisMilitares.getUnidadeServico().getCadPatrulha());				
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("index");
 		mav.addObject("dadosPM", policiaisMilitares);
-		mav.addObject("listaOcorrencias", this.ocorrenciaService.listarOcorrencias(session, codPtr, cadPatrulha));	
+		mav.addObject("listaOcorrencias", this.ocorrenciaService.listarOcorrencias(session));	
 		return mav;
 	}
 	
@@ -56,29 +53,13 @@ public class HomeController {
 		mav.addObject("message", "");
 		return mav;
 	}
-	
-	@GetMapping("/exibeMenuSuperior")
-	public ModelAndView exibeMenuSuperior(HttpSession session) {	
-		PoliciaisMilitares policiaisMilitares = (PoliciaisMilitares)session.getAttribute("policiaisMilitares");
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("dadosPM", policiaisMilitares);
-		mav.setViewName("fragments/_menuSuperior");
-		return mav;
-	}
-	
-	@GetMapping("/exibeMenuLateral")
-	public ModelAndView exibeMenuLateral() {		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("fragments/_menuLateral");
-		return mav;
-	}
-	
+			
 	@RequestMapping(value="/logout", method = RequestMethod.GET)
-	public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
+	public String logoutPage (HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	    if (auth != null){    
 	        new SecurityContextLogoutHandler().logout(request, response, auth);
-	    }
+	    }	    
 	    return "redirect:/login?logout";//You can redirect wherever you want, but generally it's a good practice to show login screen again.
 	}
 	

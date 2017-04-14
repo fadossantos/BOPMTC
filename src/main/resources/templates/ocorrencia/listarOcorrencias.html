@@ -1,0 +1,61 @@
+<div id="corpo">
+
+	<div id="menuLateral" th:replace="fragments/_menuInicial"></div>
+	
+	<div id="corpoPagina" class="row justify-content-around zeroMargPad "
+		style="margin-top: 70px;">
+
+		<div
+			class="card col-11 col-sm-8 col-md-5 col-lg-5 col-xl-5 zeroMargPad"
+			th:each="ocorrencia : ${listaOcorrencias}"
+			style="margin-bottom: 10px; margin-left: 10px; margin-right: 10px;"
+			th:onclick="'executaAjaxGet(\'/ocorrencia/obter/' + ${ocorrencia.dataHoraOcorrenciaAbsoluta} + '/' + ${ocorrencia.numeroOcorrencia} + '\',\'corpoPagina\',\'\',\'\')'">
+			<div class="card-block">
+				<span> <svg width="40" height="40"
+						th:if="${ocorrencia.origemOcorrencia.prioridade} == 'N'">
+  					<circle cx="50%" cy="50%" r="19" stroke="black" stroke-width="2"
+							fill="blue" />
+  					<text fill="yellow" font-size="25" font-family="Verdana" x="10"
+							y="30">N</text>
+				</svg> <svg width="40" height="40"
+						th:if="${ocorrencia.origemOcorrencia.prioridade} == 'A'">
+  					<circle cx="50%" cy="50%" r="19" stroke="black" stroke-width="2"
+							fill="green" />
+  					<text fill="yellow" font-size="25" font-family="Verdana" x="10"
+							y="30">A</text>
+				</svg> <svg width="40" height="40"
+						th:if="${ocorrencia.origemOcorrencia.prioridade} == 'D'">
+  					<circle cx="50%" cy="50%" r="19" stroke="black" stroke-width="2"
+							fill="green" />
+  					<text fill="yellow" font-size="25" font-family="Verdana" x="10"
+							y="30">D</text>
+				</svg> <svg width="40" height="40"
+						th:if="${ocorrencia.origemOcorrencia.prioridade} == 'U'">
+  					<circle cx="50%" cy="50%" r="19" stroke="black" stroke-width="2"
+							fill="red" />
+  					<text fill="yellow" font-size="25" font-family="Verdana" x="10"
+							y="30">U</text>
+				</svg> <svg width="40" height="40"
+						th:if="${ocorrencia.origemOcorrencia.prioridade} == 'P'">
+  					<circle cx="50%" cy="50%" r="19" stroke="black" stroke-width="2"
+							fill="black" />
+  					<text fill="yellow" font-size="25" font-family="Verdana" x="10"
+							y="30">P</text>
+				</svg> <span style="float: right; margin-top: 7px"><h5
+							th:text="${{ocorrencia.dataHoraOcorrencia}}">DataOcr</h5></span>
+				</span>
+				<h5 class="card-text"
+					th:text="'Ocorrência de nº ' + ${ocorrencia.numeroOcorrencia}">NumeroOcr</h5>
+				<h5 class="card-text"
+					th:text="${ocorrencia.origemOcorrencia.ncdInicialObj.natCod} + ' - ' + ${ocorrencia.origemOcorrencia.ncdInicialObj.natDes} + ' - ' + ${ocorrencia.origemOcorrencia.ncdInicialObj.natCplDes} + ' - ' + ${ocorrencia.origemOcorrencia.ncdInicialObj.dtlCplDes}" >Nat
+					inicial</h5>
+				<h6 class="card-text"
+					th:text="${ocorrencia.origemOcorrencia.logradouro.endereco} + ', ' + ${ocorrencia.origemOcorrencia.logradouro.numero} + ' - ' + 
+					${ocorrencia.origemOcorrencia.logradouro.bairro.descricao} + ' - ' + ${ocorrencia.origemOcorrencia.logradouro.municipio.descricao}">Nat
+					inicial</h6>
+
+			</div>
+		</div>
+
+	</div>
+</div>

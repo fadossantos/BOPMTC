@@ -1,0 +1,64 @@
+<div id="corpoPagina" class="row justify-content-around zeroMargPad "
+	style="margin-top: 70px;">
+
+	<div class="card col-11 zeroMargPad"
+		style="margin-bottom: 10px; margin-left: 10px; margin-right: 10px;">
+		<div class="card-block">
+
+			<p class="card-text" style="padding-bottom: 0px; margin-bottom: 0px;">Natureza</p>
+			<h5 class="card-text"
+				th:text="${ocorrencia.origemOcorrencia.ncdInicialObj.natCod} + ' - ' + ${ocorrencia.origemOcorrencia.ncdInicialObj.natDes} + ' - ' + ${ocorrencia.origemOcorrencia.ncdInicialObj.natCplDes} + ' - ' + ${ocorrencia.origemOcorrencia.ncdInicialObj.dtlCplDes}"
+				style="padding-bottom: 10px; margin-bottom: 10px;">natureza</h5>
+
+			<p class="card-text" style="padding-bottom: 0px; margin-bottom: 0px;">Solicitante</p>
+			<h5 class="card-text"
+				style="padding-bottom: 10px; margin-bottom: 10px;"
+				th:text="${ocorrencia.origemOcorrencia.solicitante}">Solicitante</h5>
+
+			<p class="card-text" style="padding-bottom: 0px; margin-bottom: 0px;">Atendimento
+				Inicial</p>
+			<h5 class="card-text"
+				style="padding-bottom: 10px; margin-bottom: 10px;"
+				th:text="${ocorrencia.origemOcorrencia.atendimentoInicial}">Atendimento
+				Inicial</h5>
+
+
+			<p class="card-text" style="padding-bottom: 0px; margin-bottom: 0px;">Local
+				da Ocorrência</p>
+			<h5 class="card-text"
+				style="padding-bottom: 10px; margin-bottom: 10px;"
+				th:text="${ocorrencia.origemOcorrencia.logradouro.endereco} + ', ' + ${ocorrencia.origemOcorrencia.logradouro.numero} + ' - ' + 
+					${ocorrencia.origemOcorrencia.logradouro.bairro.descricao} + ' - ' + ${ocorrencia.origemOcorrencia.logradouro.municipio.descricao}">Local
+				da Ocorrência</h5>
+
+			<p class="card-text" style="padding-bottom: 0px; margin-bottom: 0px;">Referência</p>
+			<h5 class="card-text"
+				style="padding-bottom: 10px; margin-bottom: 10px;"
+				th:text="${ocorrencia.origemOcorrencia.logradouro.pontoReferencia}">Referência</h5>
+
+
+			<p class="card-text" style="padding-bottom: 0px; margin-bottom: 0px;">DP:</p>
+			<h5 class="card-text"
+				style="padding-bottom: 10px; margin-bottom: 10px;"
+				th:text="${ocorrencia.origemOcorrencia.distritoPolicial}">DP</h5>
+
+			<p class="card-text" style="padding-bottom: 0px; margin-bottom: 0px;">Histórico
+				Inicial:</p>
+			<h5 class="card-text"
+				style="padding-bottom: 10px; margin-bottom: 10px;"
+				th:text="${ocorrencia.origemOcorrencia.historicoInicial}">Historico</h5>
+
+			<div class="text-center"
+				th:if="${ocorrencia.proprietarioOcorrencia.cpfPatrulheiro} == 0">
+				<a href="#" th:onclick = "'executaAjaxGet(\'/ocorrencia/tomarPosse/' + ${ocorrencia.dataHoraOcorrenciaAbsoluta} + '/' + ${ocorrencia.numeroOcorrencia} + '\',\'corpo\',\'\',\'\')'" class="btn btn-success">Iniciar Preenchimento</a>
+			</div>
+
+
+			<div class="text-center"
+				th:if="${ocorrencia.proprietarioOcorrencia.cpfPatrulheiro} != 0">
+				<a href="#" th:onclick = "'executaAjaxGet(\'/ocorrencia/tomarPosse/' + ${ocorrencia.dataHoraOcorrenciaAbsoluta} + '/' + ${ocorrencia.numeroOcorrencia} + '\',\'corpo\',\'\',\'\')'" class="btn btn-warning">Continuar Preenchimento</a>
+			</div>
+
+		</div>
+	</div>
+</div>
