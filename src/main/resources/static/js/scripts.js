@@ -36,7 +36,9 @@ function afterReload() {
 		format : 'd/m/Y H:i'
 	});
 	
-
+	 $('#formDadosOcorrencia').ajaxForm(function (resposta) {
+		 $('#corpo').replaceWith(resposta);
+     });
 }
 
 function ajaxindicatorstart(text) {

@@ -1,15 +1,18 @@
 
 package br.gov.sp.policiamilitar.bopmtc.model;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -37,17 +40,19 @@ public class OcorrenciaPadrao {
     @JsonProperty("CodigoOcorrenciaBOTC")
     private Long codigoOcorrenciaBOTC;
     @JsonProperty("TipoOrigemComunicacao")
-    private String tipoOrigemComunicacao;
-    @JsonProperty("DataHoraOcorrencia")
-    private Date dataHoraOcorrencia;
+    private String tipoOrigemComunicacao; 
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss[.SSS]")
+    @JsonProperty("DataHoraOcorrencia")   
+    private LocalDateTime dataHoraOcorrencia;    
     @JsonIgnore
-    private Long dataHoraOcorrenciaAbsoluta;
+    private Long dataHoraOcorrenciaAbsoluta;    
     @JsonProperty("NumeroOcorrencia")
     private Long numeroOcorrencia;
     @JsonProperty("CadOcorrencia")
-    private Long cadOcorrencia;
+    private Long cadOcorrencia;   
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss[.SSS]")
     @JsonProperty("DataInclusaoBOTC")
-    private Date dataInclusaoBOTC;
+    private LocalDateTime dataInclusaoBOTC;
     @JsonProperty("Envolvidos")
     private List<Envolvido> envolvidos = new ArrayList<Envolvido>();
     @JsonProperty("Veiculos")
@@ -101,11 +106,12 @@ public class OcorrenciaPadrao {
      * @param comarca
      * @param envolvidos
      */
-    public OcorrenciaPadrao(Long codigoOcorrenciaBOTC, String tipoOrigemComunicacao, Date dataHoraOcorrencia, Long numeroOcorrencia, Long cadOcorrencia, Date dataInclusaoBOTC, List<Envolvido> envolvidos, List<Veiculo> veiculos, DetalheOcorrencia detalheOcorrencia, OrigemOcorrencia origemOcorrencia, ProprietarioOcorrencia proprietarioOcorrencia, List<Apreensao> apreensoes, List<Anexo> anexos, RelatorioAutoridade relatorioAutoridade, Comarca comarca, Operacao operacao, Boolean liberadoFinalizacao, Long codigoResultadoEncerramento) {
+    public OcorrenciaPadrao(Long codigoOcorrenciaBOTC, String tipoOrigemComunicacao, LocalDateTime dataHoraOcorrencia, Long numeroOcorrencia, Long cadOcorrencia, LocalDateTime dataInclusaoBOTC, List<Envolvido> envolvidos, List<Veiculo> veiculos, DetalheOcorrencia detalheOcorrencia, OrigemOcorrencia origemOcorrencia, ProprietarioOcorrencia proprietarioOcorrencia, List<Apreensao> apreensoes, List<Anexo> anexos, RelatorioAutoridade relatorioAutoridade, Comarca comarca, Operacao operacao, Boolean liberadoFinalizacao, Long codigoResultadoEncerramento) {
         super();
         this.codigoOcorrenciaBOTC = codigoOcorrenciaBOTC;
         this.tipoOrigemComunicacao = tipoOrigemComunicacao;
         this.dataHoraOcorrencia = dataHoraOcorrencia;
+        this.dataHoraOcorrenciaAbsoluta = dataHoraOcorrencia.toEpochSecond(ZoneOffset.ofTotalSeconds(0));
         this.numeroOcorrencia = numeroOcorrencia;
         this.cadOcorrencia = cadOcorrencia;
         this.dataInclusaoBOTC = dataInclusaoBOTC;
@@ -144,19 +150,20 @@ public class OcorrenciaPadrao {
     }
 
     @JsonProperty("DataHoraOcorrencia")
-    public Date getDataHoraOcorrencia() {
+    public LocalDateTime getDataHoraOcorrencia() {
         return dataHoraOcorrencia;
     }
-
+    
+    @JsonIgnore
     public Long getDataHoraOcorrenciaAbsoluta() {
         return dataHoraOcorrenciaAbsoluta;
     }
-    
+
     @JsonProperty("DataHoraOcorrencia")
-    public void setDataHoraOcorrencia(Date dataHoraOcorrencia) {
+    public void setDataHoraOcorrencia(LocalDateTime dataHoraOcorrencia) {
         this.dataHoraOcorrencia = dataHoraOcorrencia;
-        this.dataHoraOcorrenciaAbsoluta = dataHoraOcorrencia.getTime();
-    }
+        this.dataHoraOcorrenciaAbsoluta = dataHoraOcorrencia.toEpochSecond(ZoneOffset.ofTotalSeconds(0));
+       }
 
     @JsonProperty("NumeroOcorrencia")
     public Long getNumeroOcorrencia() {
@@ -179,12 +186,12 @@ public class OcorrenciaPadrao {
     }
 
     @JsonProperty("DataInclusaoBOTC")
-    public Date getDataInclusaoBOTC() {
+    public LocalDateTime getDataInclusaoBOTC() {
         return dataInclusaoBOTC;
     }
 
     @JsonProperty("DataInclusaoBOTC")
-    public void setDataInclusaoBOTC(Date dataInclusaoBOTC) {
+    public void setDataInclusaoBOTC(LocalDateTime dataInclusaoBOTC) {
         this.dataInclusaoBOTC = dataInclusaoBOTC;        
     }
 

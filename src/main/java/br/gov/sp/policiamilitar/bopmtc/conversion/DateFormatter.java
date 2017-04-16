@@ -20,44 +20,30 @@
 package br.gov.sp.policiamilitar.bopmtc.conversion;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
-import java.util.TimeZone;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.format.Formatter;
 
+public class DateFormatter implements Formatter<LocalDateTime> {
 
-public class DateFormatter implements Formatter<Date> {
+	public DateFormatter() {
+		super();
+	}
 
-    @Autowired
-    private MessageSource messageSource;
+	public LocalDateTime parse(final String text, Locale locale) throws ParseException {
+		return LocalDateTime.parse(text, createDateFormat());
+	}
 
+	public String print(final LocalDateTime object, final Locale locale) {
+		return object.format(createDateFormat());
+	}
 
-    public DateFormatter() {
-        super();
-    }
+	private DateTimeFormatter createDateFormat() {
+		final String format = "dd/MM/yyyy HH:mm";
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
+		return formatter;
+	}
 
-    public Date parse(final String text, final Locale locale) throws ParseException {
-        final SimpleDateFormat dateFormat = createDateFormat(locale);
-    	return dateFormat.parse(text);
-    }
-
-    public String print(final Date object, final Locale locale) {
-        final SimpleDateFormat dateFormat = createDateFormat(locale);
-    	return dateFormat.format(object);
-    }
-
-    private SimpleDateFormat createDateFormat(final Locale locale) {
-        final String format = "dd/MM/yyyy' 'HH:mm";
-
-        final SimpleDateFormat dateFormat = new SimpleDateFormat(format);
-        dateFormat.setLenient(false);
-       //dateFormat.setTimeZone(TimeZone.getTimeZone("America/Sao_Paulo"));
-        dateFormat.setTimeZone(TimeZone.getTimeZone("Universal"));
-       return dateFormat;
-    }
- 
 }

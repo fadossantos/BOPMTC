@@ -1,8 +1,6 @@
 package br.gov.sp.policiamilitar.bopmtc.controller;
 
 import java.util.ArrayList;
-import java.util.Date;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,8 +54,7 @@ public class OcorrenciaController {
 	
 	@GetMapping("/ocorrencia/tomarPosse/{dataHoraOcorrenciaAbsoluta}/{numeroOcorrencia}")
 	public ModelAndView tomarPosse(HttpSession session, @PathVariable Long dataHoraOcorrenciaAbsoluta, @PathVariable Long numeroOcorrencia){
-		OcorrenciaPadrao ocr = this.posseService.tomarPosse(session,dataHoraOcorrenciaAbsoluta, numeroOcorrencia);
-		PoliciaisMilitares policiaisMilitares = this.policialMilitarService.obterPolicialLogado(session, SecurityContextHolder.getContext().getAuthentication().getName());
+		this.posseService.tomarPosse(session,dataHoraOcorrenciaAbsoluta, numeroOcorrencia);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("redirect:/dadosOcorrencia");
 		return mav;

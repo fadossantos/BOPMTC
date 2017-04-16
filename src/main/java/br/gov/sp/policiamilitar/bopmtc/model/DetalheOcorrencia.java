@@ -1,15 +1,17 @@
 
 package br.gov.sp.policiamilitar.bopmtc.model;
 
+import java.time.LocalDateTime;
+
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import br.gov.sp.policiamilitar.bopmtc.model.localdb.NCD;
-import java.util.Date;
-
-import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -38,19 +40,21 @@ public class DetalheOcorrencia {
     
     @JsonIgnore
     private NCD ncdFinalObj;
-    
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss[.SSS]")
     @JsonProperty("DataHoraFato")
-    private Date dataHoraFato;
+    private LocalDateTime dataHoraFato;
     @JsonProperty("Logradouro")
     private Logradouro logradouro;
     @JsonProperty("CodigoLocal")
     private String codigoLocal;
     @JsonProperty("CodigoLocalComplemento")
     private Long codigoLocalComplemento;
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss[.SSS]")
     @JsonProperty("DataHoraChegadaLocal")
-    private Date dataHoraChegadaLocal;
+    private LocalDateTime dataHoraChegadaLocal;
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss[.SSS]")
     @JsonProperty("DataHoraSaidaFinal")
-    private Date dataHoraSaidaFinal;
+    private LocalDateTime dataHoraSaidaFinal;
     @JsonProperty("CodigoLocalDetalhe")
     private Long codigoLocalDetalhe;
     @JsonProperty("LocalAmbiente")
@@ -100,7 +104,7 @@ public class DetalheOcorrencia {
      * @param codigoTipoTrecho
      * @param codigoLocal
      */
-    public DetalheOcorrencia(Long ncdFinal, Date dataHoraFato, Logradouro logradouro, String codigoLocal, Long codigoLocalComplemento, Date dataHoraChegadaLocal, Date dataHoraSaidaFinal, Long codigoLocalDetalhe, String localAmbiente, Boolean localPreservado, Long codigoIluminacao, Long codigoTempo, Long codigoSemaforo, Long codigoCondicaoPista, Long codigoTipoTrecho, Long latitudeFinal, Long longitudeFinal) {
+    public DetalheOcorrencia(Long ncdFinal, LocalDateTime dataHoraFato, Logradouro logradouro, String codigoLocal, Long codigoLocalComplemento, LocalDateTime dataHoraChegadaLocal, LocalDateTime dataHoraSaidaFinal, Long codigoLocalDetalhe, String localAmbiente, Boolean localPreservado, Long codigoIluminacao, Long codigoTempo, Long codigoSemaforo, Long codigoCondicaoPista, Long codigoTipoTrecho, Long latitudeFinal, Long longitudeFinal) {
         super();
         this.ncdFinal = ncdFinal;
         this.ncdFinalObj = new NCD();
@@ -144,12 +148,12 @@ public class DetalheOcorrencia {
     }
 
     @JsonProperty("DataHoraFato")
-    public Date getDataHoraFato() {
+    public LocalDateTime getDataHoraFato() {
         return dataHoraFato;
     }
 
     @JsonProperty("DataHoraFato")
-    public void setDataHoraFato(Date dataHoraFato) {
+    public void setDataHoraFato(LocalDateTime dataHoraFato) {
         this.dataHoraFato = dataHoraFato;
     }
 
@@ -184,22 +188,22 @@ public class DetalheOcorrencia {
     }
 
     @JsonProperty("DataHoraChegadaLocal")
-    public Date getDataHoraChegadaLocal() {
+    public LocalDateTime getDataHoraChegadaLocal() {
         return dataHoraChegadaLocal;
     }
 
     @JsonProperty("DataHoraChegadaLocal")
-    public void setDataHoraChegadaLocal(Date dataHoraChegadaLocal) {
+    public void setDataHoraChegadaLocal(LocalDateTime dataHoraChegadaLocal) {
         this.dataHoraChegadaLocal = dataHoraChegadaLocal;
     }
 
     @JsonProperty("DataHoraSaidaFinal")
-    public Date getDataHoraSaidaFinal() {
+    public LocalDateTime getDataHoraSaidaFinal() {
         return dataHoraSaidaFinal;
     }
 
     @JsonProperty("DataHoraSaidaFinal")
-    public void setDataHoraSaidaFinal(Date dataHoraSaidaFinal) {
+    public void setDataHoraSaidaFinal(LocalDateTime dataHoraSaidaFinal) {
         this.dataHoraSaidaFinal = dataHoraSaidaFinal;
     }
 

@@ -104,7 +104,7 @@ public class DadosOcorrenciaController {
 	}
 	
 	
-	@RequestMapping(value = "/dadosOcorrencia", params = { "save" }, method = RequestMethod.POST)
+	@RequestMapping(value = "/dadosOcorrencia/salvar", method = RequestMethod.POST)
 	public String tomarPosse(HttpSession session, @Valid DetalheOcorrencia detalheOcorrencia, final BindingResult bindingResult,
 			final ModelMap model){
 		PoliciaisMilitares policiaisMilitares = this.policialMilitarService.obterPolicialLogado(session, SecurityContextHolder.getContext().getAuthentication().getName());
@@ -117,9 +117,7 @@ public class DadosOcorrenciaController {
 		}
 		ocr = this.dadosOcorrenciaService.salvarDadosOcorrencia(session, detalheOcorrencia);
 		model.clear();
-		model.addAttribute("dadosPM", policiaisMilitares);
-		model.addAttribute("ocorrencia", ocr);		
-		return "ocorrencia/envolvidos/listarEnvolvidos";
+		return "redirect:/envolvidos/listarEnvolvidos";
 	}
 	
 	

@@ -42,6 +42,7 @@ public class OcorrenciaService {
 	}
 	
 	public ArrayList<OcorrenciaPadrao> obterListaDeOcorrencias(HttpSession session){
+		@SuppressWarnings("unchecked")
 		ArrayList<OcorrenciaPadrao> listaOcorrencias = (ArrayList<OcorrenciaPadrao>)session.getAttribute("listaOcorrencias");
 		if (listaOcorrencias == null)
 		{

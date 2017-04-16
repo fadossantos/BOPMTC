@@ -12,8 +12,6 @@ import org.springframework.web.client.RestTemplate;
 
 import br.gov.sp.policiamilitar.bopmtc.interceptors.HeaderRequestInterceptor;
 import br.gov.sp.policiamilitar.bopmtc.model.AcabamentoArma;
-import br.gov.sp.policiamilitar.bopmtc.model.CalibreArma;
-import br.gov.sp.policiamilitar.bopmtc.model.TipoVeiculo;
 
 @Service
 public class AcabamentoArmaService {

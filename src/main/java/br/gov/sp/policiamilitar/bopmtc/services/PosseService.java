@@ -1,9 +1,8 @@
 package br.gov.sp.policiamilitar.bopmtc.services;
 
-import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TimeZone;
 
 import javax.servlet.http.HttpSession;
 
@@ -30,11 +29,10 @@ public class PosseService {
 		OcorrenciaPadrao ocr = this.ocorrenciaService.obterOcorrenciaDaLista(session, dataHoraOcorrenciaAbsoluta, numeroOcorrencia);
 		PoliciaisMilitares pm = (PoliciaisMilitares) session.getAttribute("policiaisMilitares");
 		String imei = "358550060023621";
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-		sdf.setTimeZone(TimeZone.getTimeZone("Universal"));
+		
 		StringBuilder uri = new StringBuilder(
 				"http://homologa.policiamilitar.sp.gov.br/BOPMTC.ModuloExterno/api/externo/ocorrencia/posse/obter?");
-		uri.append("dataOcorrencia=" + sdf.format(ocr.getDataHoraOcorrencia()));
+		uri.append("dataOcorrencia=" + ocr.getDataHoraOcorrencia().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm")));
 		uri.append("&numeroOcorrencia=" + ocr.getNumeroOcorrencia());
 		uri.append("&cadOcorrencia=" + ocr.getCadOcorrencia());
 		uri.append("&cadPatrulha=" + pm.getUnidadeServico().getCadPatrulha());

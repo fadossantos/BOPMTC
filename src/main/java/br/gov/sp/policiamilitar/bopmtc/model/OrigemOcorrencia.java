@@ -1,18 +1,17 @@
 
 package br.gov.sp.policiamilitar.bopmtc.model;
 
+import java.time.LocalDateTime;
+
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import br.gov.sp.policiamilitar.bopmtc.model.localdb.NCD;
-import br.gov.sp.policiamilitar.bopmtc.services.NCDService;
-
-import java.util.Date;
-
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -36,8 +35,9 @@ public class OrigemOcorrencia {
     private String prioridade;
     @JsonProperty("Status")
     private String status;
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss[.SSS]")
     @JsonProperty("DataGeracaoOcorrencia")
-    private Date dataGeracaoOcorrencia;
+    private LocalDateTime dataGeracaoOcorrencia;
     @JsonProperty("NcdInicial")
     private Long ncdInicial;
     
@@ -87,7 +87,7 @@ public class OrigemOcorrencia {
      * @param prioridade
      * @param distritoPolicial
      */
-    public OrigemOcorrencia(String prioridade, String status, Date dataGeracaoOcorrencia, Long ncdInicial, Logradouro logradouro, String solicitante, String atendimentoInicial, String distritoPolicial, String historicoInicial, String reiteracoes, Long oPM, Long latitudeInicial, Long longitudeInicial) {
+    public OrigemOcorrencia(String prioridade, String status, LocalDateTime dataGeracaoOcorrencia, Long ncdInicial, Logradouro logradouro, String solicitante, String atendimentoInicial, String distritoPolicial, String historicoInicial, String reiteracoes, Long oPM, Long latitudeInicial, Long longitudeInicial) {
         super();
         this.prioridade = prioridade;
         this.status = status;
@@ -127,12 +127,12 @@ public class OrigemOcorrencia {
     }
 
     @JsonProperty("DataGeracaoOcorrencia")
-    public Date getDataGeracaoOcorrencia() {
+    public LocalDateTime getDataGeracaoOcorrencia() {
         return dataGeracaoOcorrencia;
     }
 
     @JsonProperty("DataGeracaoOcorrencia")
-    public void setDataGeracaoOcorrencia(Date dataGeracaoOcorrencia) {
+    public void setDataGeracaoOcorrencia(LocalDateTime dataGeracaoOcorrencia) {
         this.dataGeracaoOcorrencia = dataGeracaoOcorrencia;
     }
 
