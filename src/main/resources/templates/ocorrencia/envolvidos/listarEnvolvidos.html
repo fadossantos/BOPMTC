@@ -16,14 +16,21 @@
 					<h5 class="card-text" th:text="${envolvido.rG}">Nat inicial</h5>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-12">
-					<a
-						th:onclick="'executaAjaxGet(\'/envolvido/pesquisarEnvolvido\',\'corpo\',\'\',\'\')'">Adicionar
-						Envolvido</a>
-				</div>
+		</div>
+		<div class="row justify-content-center" >
+			<div class="col-1">
+				<a class="centralizado"
+					th:onclick="'executaAjaxGet(\'/envolvidos/pesquisar\',\'corpo\',\'\',\'\')'">
+					<span> <svg width="40" height="40">
+  					<circle cx="50%" cy="50%" r="19" stroke="black" stroke-width="2"
+								fill="#0275D8" />
+  					<text fill="yellow" font-size="25" font-family="Verdana" x="10"
+								y="29">+</text>
+				</svg></span>
+				</a>
 			</div>
 		</div>
+
 
 	</div>
 </div>

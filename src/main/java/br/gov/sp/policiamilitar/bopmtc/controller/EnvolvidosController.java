@@ -10,12 +10,14 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.gov.sp.policiamilitar.bopmtc.model.Envolvido;
 import br.gov.sp.policiamilitar.bopmtc.model.OcorrenciaPadrao;
+import br.gov.sp.policiamilitar.bopmtc.model.ParametrosPesquisa;
 import br.gov.sp.policiamilitar.bopmtc.model.PoliciaisMilitares;
 import br.gov.sp.policiamilitar.bopmtc.services.EnvolvidoService;
 import br.gov.sp.policiamilitar.bopmtc.services.OcorrenciaService;
@@ -65,10 +67,24 @@ public class EnvolvidosController {
 		OcorrenciaPadrao ocr = (OcorrenciaPadrao)session.getAttribute("ocorrencia");
 		PoliciaisMilitares policiaisMilitares = this.policialMilitarService.obterPolicialLogado(session, SecurityContextHolder.getContext().getAuthentication().getName());
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("ocorrencia/envolvidos/pesquisarEnvolvido");
+		mav.setViewName("ocorrencia/envolvidos/formPesquisaEnvolvido");
 		mav.addObject("dadosPM", policiaisMilitares);
 		mav.addObject("ocorrencia", ocr);
+		mav.addObject("parametrosPesquisa", new ParametrosPesquisa());
 		return mav;
+	}
+	
+	@PostMapping("/envolvidos/pesquisar")
+	public String pesquisaEnvolvido(HttpSession session, @Valid ParametrosPesquisa parametrosPesquisa, final BindingResult bindingResult,
+			final ModelMap model){
+		OcorrenciaPadrao ocr = (OcorrenciaPadrao)session.getAttribute("ocorrencia");
+		PoliciaisMilitares policiaisMilitares = this.policialMilitarService.obterPolicialLogado(session, SecurityContextHolder.getContext().getAuthentication().getName());
+		model.clear();
+		model.addAttribute("dadosPM", policiaisMilitares);
+		model.addAttribute("ocorrencia", ocr);
+		model.addAttribute("parametrosPesquisa", parametrosPesquisa);
+		model.addAttribute("resultadoPesquisa", "resultado da pesquisa");
+		return "ocorrencia/envolvidos/formPesquisaEnvolvido";
 	}
 	
 	

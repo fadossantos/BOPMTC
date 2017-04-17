@@ -38,6 +38,11 @@ function afterReload() {
 	
 	 $('#formDadosOcorrencia').ajaxForm(function (resposta) {
 		 $('#corpo').replaceWith(resposta);
+		 afterReload();
+     });
+	 $('#formPesquisaEnvolvido').ajaxForm(function (resposta) {
+		 $('#corpo').replaceWith(resposta);
+		 afterReload();
      });
 }
 

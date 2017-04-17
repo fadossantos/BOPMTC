@@ -6,7 +6,17 @@
 		style="margin-top: 70px;">
 
 		<div class="container card">
-			<form class="card-block">
+			<form id="formPesquisaEnvolvido" class="card-block" role="form"
+				th:action="@{/envolvidos/pesquisar}"
+				th:object="${parametrosPesquisa}" method="post">
+				<div class="row" th:if="${#fields.hasErrors('*')}">
+					<div class="col-lg-12">
+						<ul class="errorlist">
+							<li th:each="err : ${#fields.errors('*')}" th:text="${err}">Dados
+								Incorretos</li>
+						</ul>
+					</div>
+				</div>
 				<div class="row">
 					<div class="col-12">
 						<ul class="nav nav-tabs" role="tablist" id="abasNavegacao">
@@ -14,7 +24,7 @@
 								data-toggle="tab" href="#dadosPesquisa" role="tab">Dados
 									Pesquisa</a></li>
 							<li class="nav-item"><a class="nav-link" data-toggle="tab"
-								href="#caracteristicasLocal" role="tab">Resultado</a></li>
+								href="#resultadoPesquisa" role="tab">Resultado</a></li>
 						</ul>
 						<br />
 					</div>
@@ -23,44 +33,79 @@
 				<div class="tab-content">
 					<div class="tab-pane active" id="dadosPesquisa" role="tabpanel">
 
+
 						<div class="form-group row">
-							<label for="tipoPesquisa" class="col-sm-2 col-form-label">Tipo
-								Pesquisa</label>
-							<div class="col-sm-2">
-								<select class="form-control" id="codNatFim">
-									<option>Nome/Nome da M�e</option>
-									<option>RG</option>
-									<option>CPF</option>
-									<option>CNH</option>
+							<label for="CodNaturezaFinal" class="col-sm-2 col-form-label">Tipo
+								Consulta</label>
+							<div class="col-sm-3">
+								<select class="form-control" th:field="*{tipoPesquisa}">
+									<option value = "0">RG</option>
+									<option value = "1">CPF</option>
+									<option value = "2">Nome/Nome da Mãe</option>
+									<option value = "3">CNH</option>
 								</select>
 							</div>
+						</div>
 
-							<div id="corpoPesquisa">
+						<div class="form-group row" th:if="${parametrosPesquisa.tipoPesquisa} == 0">
 
-								<div class="form-group row">
-									<label for="Ponto de Referencia"
-										class="col-sm-2 col-form-label">Par�metro</label>
-									<div class="col-sm-10">
-										<input type="referencia" class="form-control" id="referencia"
-											placeholder="Referencia" />
-									</div>
-								</div>
+							<label for="NaturezaFinal" class="col-sm-2 col-form-label">Nº
+								do RG sem dígito</label>
 
-								<div class="row justify-content-center">
-									<button type="submit" class="btn btn-primary">Salvar</button>
-								</div>
-
-
-
+							<div class="col-sm-5" id="listaNCD">
+								<input class="form-control" type="text" th:field="*{parametro1}"/>
 							</div>
+						</div>
+						
+						<div class="form-group row" th:if="${parametrosPesquisa.tipoPesquisa} == 1">
 
+							<label for="NaturezaFinal" class="col-sm-2 col-form-label">Nº do CPF</label>
+
+							<div class="col-sm-5" id="listaNCD">
+								<input class="form-control" type="text" th:field="*{parametro1}"/>
+							</div>
+						</div>
+
+						<div class="form-group row" th:if="${parametrosPesquisa.tipoPesquisa} == 3">
+
+							<label for="NaturezaFinal" class="col-sm-2 col-form-label">Nº da CNH</label>
+
+							<div class="col-sm-5" id="listaNCD">
+								<input class="form-control" type="text" th:field="*{parametro1}"/>
+							</div>
+						</div>
+						
+						<div class="form-group row" th:if="${parametrosPesquisa.tipoPesquisa} == 2">
+							
+							<label for="NaturezaFinal" class="col-sm-2 col-form-label">Nome</label>
+
+							<div class="col-sm-4" id="listaNCD">
+								<input class="form-control" type="text" th:field="*{parametro1}"/>
+							</div>
+							
+							<label for="NaturezaFinal" class="col-sm-2 col-form-label">Nome da Mãe</label>
+
+							<div class="col-sm-4" id="listaNCD">
+								<input class="form-control" type="text" th:field="*{parametro2}"/>
+							</div>
+							
+						</div>
+						
+						
+						
+						<div class="row justify-content-center">
+							<button type="submit" class="btn btn-primary">Pesquisar</button>
 						</div>
 					</div>
 
 					<div class="tab-pane" id="resultadoPesquisa" role="tabpanel">
-
 						<p>Resultado da Pesquisa</p>
 					</div>
+
+
+
+
+
 
 				</div>
 			</form>

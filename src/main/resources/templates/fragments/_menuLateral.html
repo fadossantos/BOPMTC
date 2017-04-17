@@ -1,5 +1,5 @@
 
-<div id="menuLateral" class="sidenav" style="width:250px;">
+<div id="menuLateral" class="sidenav" style="width:0px;">
 	<div class="container-fluid">
 		<ul class="nav flex-column">
 				<li class="nav-item"><button class="btn btn-secondary"
@@ -33,7 +33,8 @@
 				</button></li>
 			<div class="dropdown-divider"></div>
 			<li class="nav-item"><button class="btn btn-secondary"
-					style="height: 60px; width: 100%;" type="button">
+					style="height: 60px; width: 100%;" type="button"
+					onclick="executaAjaxGet('/envolvidos/listarEnvolvidos', 'corpo', '', '')">
 					<table  width="100%">
 						<tr>
 							<th width="20%"><i class="fa fa-users" /></th>
