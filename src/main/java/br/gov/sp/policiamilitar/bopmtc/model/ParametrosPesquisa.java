@@ -33,7 +33,15 @@ public class ParametrosPesquisa {
     }
 
    
-    @JsonProperty("TipoPesquisa")
+    public ParametrosPesquisa(int i) {
+		this.setTipoPesquisa(i);
+		this.setParametro1("");
+		this.setParametro2("");
+		this.setParametro3("");		
+	}
+
+
+	@JsonProperty("TipoPesquisa")
     public int getTipoPesquisa() {
         return tipoPesquisa;
     }

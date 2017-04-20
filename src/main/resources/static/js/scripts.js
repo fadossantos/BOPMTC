@@ -5,8 +5,8 @@ function executaAjaxGet(urlChamada, divDestino, preExecute, posExecute) {
 		beforeSend : preExecute,
 
 		success : function(response) {
-
-			$('#' + divDestino).replaceWith(response);
+			$('#' + divDestino).empty();
+			$('#' + divDestino).html(response);
 		},
 		complete : function() {
 			posExecute;
@@ -37,11 +37,13 @@ function afterReload() {
 	});
 	
 	 $('#formDadosOcorrencia').ajaxForm(function (resposta) {
-		 $('#corpo').replaceWith(resposta);
+		 $('#corpo').empty();
+		 $('#corpo').html(response);
 		 afterReload();
      });
 	 $('#formPesquisaEnvolvido').ajaxForm(function (resposta) {
-		 $('#corpo').replaceWith(resposta);
+		 $('#corpo').empty();
+		 $('#corpo').html(response);
 		 afterReload();
      });
 }

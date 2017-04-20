@@ -1,6 +1,5 @@
-<div class="col-sm-6" id="listaNCD">
+
 	<select class="form-control" name="ncdFinalObj.ncdCod" id="ncdFinalObj.ncdCod" >
 		<option th:each="ncd : ${listaNCD}"
 			th:value="${ncd.ncdCod}" th:text="${ncd.natDes} + ' - ' + ${ncd.natCplDes} + ' - ' + ${ncd.dtlCplDes}">Natureza</option>
 	</select>
-</div>

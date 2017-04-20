@@ -1,114 +1,121 @@
-<div id="corpo">
 
-	<div id="menuLateral" th:replace="fragments/_menuLateral"></div>
+<div id="menuLateral" th:replace="fragments/_menuLateral"></div>
 
-	<div id="corpoPagina" class="row justify-content-around zeroMargPad "
-		style="margin-top: 70px;">
+<div id="corpoPagina" class="row justify-content-around zeroMargPad "
+	style="margin-top: 70px;">
 
-		<div class="container card">
-			<form id="formPesquisaEnvolvido" class="card-block" role="form"
-				th:action="@{/envolvidos/pesquisar}"
-				th:object="${parametrosPesquisa}" method="post">
-				<div class="row" th:if="${#fields.hasErrors('*')}">
-					<div class="col-lg-12">
-						<ul class="errorlist">
-							<li th:each="err : ${#fields.errors('*')}" th:text="${err}">Dados
-								Incorretos</li>
-						</ul>
-					</div>
+	<div class="container card" id="containerPesquisaEnvolvido">
+		<form id="formPesquisaEnvolvido" class="card-block" role="form"
+			th:action="@{/envolvidos/pesquisar}"
+			th:object="${parametrosPesquisa}" method="post">
+			<div class="row" th:if="${#fields.hasErrors('*')}">
+				<div class="col-lg-12">
+					<ul class="errorlist">
+						<li th:each="err : ${#fields.errors('*')}" th:text="${err}">Dados
+							Incorretos</li>
+					</ul>
 				</div>
-				<div class="row">
-					<div class="col-12">
-						<ul class="nav nav-tabs" role="tablist" id="abasNavegacao">
-							<li class="nav-item"><a class="nav-link active"
-								data-toggle="tab" href="#dadosPesquisa" role="tab">Dados
-									Pesquisa</a></li>
-							<li class="nav-item"><a class="nav-link" data-toggle="tab"
-								href="#resultadoPesquisa" role="tab">Resultado</a></li>
-						</ul>
-						<br />
-					</div>
+			</div>
+
+			<div class="row justify-content-center">
+				<div class="col-12">
+					<h4>Pesquisa de Envolvidos</h4>
 				</div>
-
-				<div class="tab-content">
-					<div class="tab-pane active" id="dadosPesquisa" role="tabpanel">
+			</div>
 
 
-						<div class="form-group row">
-							<label for="CodNaturezaFinal" class="col-sm-2 col-form-label">Tipo
-								Consulta</label>
-							<div class="col-sm-3">
-								<select class="form-control" th:field="*{tipoPesquisa}">
-									<option value = "0">RG</option>
-									<option value = "1">CPF</option>
-									<option value = "2">Nome/Nome da Mãe</option>
-									<option value = "3">CNH</option>
-								</select>
-							</div>
+			<div class="row">
+				<div class="col-12">
+					<ul class="nav nav-tabs" role="tablist" id="abasNavegacao">
+						<li class="nav-item"><a class="nav-link active"
+							data-toggle="tab" href="#dadosPesquisa" role="tab">Dados
+								Pesquisa</a></li>
+						<li class="nav-item"><a class="nav-link" data-toggle="tab"
+							href="#resultadoPesquisa" role="tab">Resultado</a></li>
+					</ul>
+					<br />
+				</div>
+			</div>
+
+			<div class="tab-content">
+				<div class="tab-pane active" id="dadosPesquisa" role="tabpanel">
+
+
+					<div class="form-group row">
+						<label for="CodNaturezaFinal" class="col-sm-2 col-form-label">Tipo
+							Consulta</label>
+						<div class="col-sm-3">
+							<select class="form-control" th:field="*{tipoPesquisa}"
+								th:onChange="'executaAjaxGet(\'/envolvidos/tipoPesquisa/\' + $(this).val()   , \'containerPesquisaEnvolvido\', \'\', \'\');'">
+								>
+								<option value="0">RG</option>
+								<option value="1">CPF</option>
+								<option value="2">Nome/Nome da Mãe</option>
+								<option value="3">CNH</option>
+							</select>
 						</div>
-
-						<div class="form-group row" th:if="${parametrosPesquisa.tipoPesquisa} == 0">
-
+					</div>
+					<div id="parametrosPesquisa">
+						<div class="form-group row"
+							th:if="${parametrosPesquisa.tipoPesquisa} == 0">
 							<label for="NaturezaFinal" class="col-sm-2 col-form-label">Nº
 								do RG sem dígito</label>
-
 							<div class="col-sm-5" id="listaNCD">
-								<input class="form-control" type="text" th:field="*{parametro1}"/>
+								<input class="form-control" type="text" th:field="*{parametro1}" />
 							</div>
 						</div>
-						
-						<div class="form-group row" th:if="${parametrosPesquisa.tipoPesquisa} == 1">
 
-							<label for="NaturezaFinal" class="col-sm-2 col-form-label">Nº do CPF</label>
-
+						<div class="form-group row"
+							th:if="${parametrosPesquisa.tipoPesquisa} == 1">
+							<label for="NaturezaFinal" class="col-sm-2 col-form-label">Nº
+								do CPF</label>
 							<div class="col-sm-5" id="listaNCD">
-								<input class="form-control" type="text" th:field="*{parametro1}"/>
+								<input class="form-control" type="text" th:field="*{parametro1}" />
 							</div>
 						</div>
 
-						<div class="form-group row" th:if="${parametrosPesquisa.tipoPesquisa} == 3">
-
-							<label for="NaturezaFinal" class="col-sm-2 col-form-label">Nº da CNH</label>
-
+						<div class="form-group row"
+							th:if="${parametrosPesquisa.tipoPesquisa} == 3">
+							<label for="NaturezaFinal" class="col-sm-2 col-form-label">Nº
+								da CNH</label>
 							<div class="col-sm-5" id="listaNCD">
-								<input class="form-control" type="text" th:field="*{parametro1}"/>
+								<input class="form-control" type="text" th:field="*{parametro1}" />
 							</div>
 						</div>
-						
-						<div class="form-group row" th:if="${parametrosPesquisa.tipoPesquisa} == 2">
-							
-							<label for="NaturezaFinal" class="col-sm-2 col-form-label">Nome</label>
 
-							<div class="col-sm-4" id="listaNCD">
-								<input class="form-control" type="text" th:field="*{parametro1}"/>
+						<div class="form-group row"
+							th:if="${parametrosPesquisa.tipoPesquisa} == 2">
+							<label for="NaturezaFinal" class="col-md-2 col-form-label">Nome</label>
+							<div class="col-md-4" id="listaNCD">
+								<input class="form-control" type="text" th:field="*{parametro1}" />
 							</div>
-							
-							<label for="NaturezaFinal" class="col-sm-2 col-form-label">Nome da Mãe</label>
-
-							<div class="col-sm-4" id="listaNCD">
-								<input class="form-control" type="text" th:field="*{parametro2}"/>
+							<label for="NaturezaFinal" class="col-md-2 col-form-label">Nome
+								da Mãe</label>
+							<div class="col-md-4" id="listaNCD">
+								<input class="form-control" type="text" th:field="*{parametro2}" />
 							</div>
-							
-						</div>
-						
-						
-						
-						<div class="row justify-content-center">
-							<button type="submit" class="btn btn-primary">Pesquisar</button>
 						</div>
 					</div>
-
-					<div class="tab-pane" id="resultadoPesquisa" role="tabpanel">
-						<p>Resultado da Pesquisa</p>
+					<div class="row justify-content-center">
+						<button type="submit" class="btn btn-primary">Pesquisar</button>
 					</div>
-
-
-
-
-
-
 				</div>
-			</form>
-		</div>
+				<div class="tab-pane" id="resultadoPesquisa" role="tabpanel">
+					<div th:if="${resultadoPesquisa} == null">
+						<div class="row justify-content-center">
+							 <a class="btn btn-primary"
+								onclick="executaAjaxGet('/envolvidos/adicionar?tipoPesquisa=1&parametro1=parametro1&parametro2=parametro2','corpo','','')">Confirmar</a>
+						 
+						</div>
+					</div>
+				</div>
+
+
+
+
+
+
+			</div>
+		</form>
 	</div>
 </div>

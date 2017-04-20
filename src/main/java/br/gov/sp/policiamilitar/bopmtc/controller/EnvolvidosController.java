@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.gov.sp.policiamilitar.bopmtc.model.Envolvido;
@@ -62,6 +63,22 @@ public class EnvolvidosController {
 		return mav;
 	}
 	
+	@GetMapping("/envolvidos/adicionar")
+	public ModelAndView adicionarEnvolvido(HttpSession session,
+			@RequestParam(value="tipoPesquisa;", required=true) String tipoPesquisa, 
+			@RequestParam(value="parametro1;", required = true) String parametro1, 
+			@RequestParam(value="parametro2;", required = false) String parametro2){
+		OcorrenciaPadrao ocr = (OcorrenciaPadrao)session.getAttribute("ocorrencia");
+		PoliciaisMilitares policiaisMilitares = this.policialMilitarService.obterPolicialLogado(session, SecurityContextHolder.getContext().getAuthentication().getName());
+		Envolvido env = this.envolvidoService.pesquisarEnvolvido(tipoPesquisa, parametro1, parametro2);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("ocorrencia/envolvidos/formDadosEnvolvido");
+		mav.addObject("dadosPM", policiaisMilitares);
+		mav.addObject("ocorrencia", ocr);
+		mav.addObject("envolvido", env);
+		return mav;
+	}
+	
 	@GetMapping("/envolvidos/pesquisar")
 	public ModelAndView exibirPesquisaEnvolvido(HttpSession session){
 		OcorrenciaPadrao ocr = (OcorrenciaPadrao)session.getAttribute("ocorrencia");
@@ -87,7 +104,15 @@ public class EnvolvidosController {
 		return "ocorrencia/envolvidos/formPesquisaEnvolvido";
 	}
 	
-	
+	@GetMapping("/envolvidos/tipoPesquisa/{tipoPesquisa}")
+	public ModelAndView pesquisaEnvolvido(HttpSession session, @PathVariable int tipoPesquisa){
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("ocorrencia/envolvidos/tipoPesquisa");
+		mav.addObject("parametrosPesquisa", new ParametrosPesquisa(tipoPesquisa));
+		mav.addObject("resultadoPesquisa", "resultadopesquisa");
+		return mav;
+	}
+		
 	@RequestMapping(value = "/envolvidos/salvar", method = RequestMethod.POST)
 	public String tomarPosse(HttpSession session, @Valid Envolvido envolvido, final BindingResult bindingResult,
 			final ModelMap model){

@@ -29,6 +29,11 @@ public class EnvolvidoService {
 		// TODO Auto-generated method stub
 		
 	}
+
+	public Envolvido pesquisarEnvolvido(String tipoPesquisa, String parametro1, String parametro2) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 	
